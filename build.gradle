@@ -29,8 +29,17 @@ dependencies {
     implementation 'org.zeith:HTTPLib:' + config.httplib
 }
 
-test {
-    useJUnitPlatform()
+task shadedJar(type: Jar) {
+    manifest.from jar.manifest
+    classifier = 'shaded'
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    } {
+        exclude "META-INF/*.SF"
+        exclude "META-INF/*.DSA"
+        exclude "META-INF/*.RSA"
+    }
+    with jar
 }
 
 task srcJar(type: Jar, dependsOn: classes) {
@@ -41,6 +50,12 @@ task srcJar(type: Jar, dependsOn: classes) {
 task javadocJar(type: Jar, dependsOn: classes) {
     from javadoc
     classifier = 'javadoc'
+}
+
+artifacts {
+    archives shadedJar
+    archives srcJar
+    archives javadocJar
 }
 
 publishing {
