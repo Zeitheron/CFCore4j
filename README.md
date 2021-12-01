@@ -1,11 +1,14 @@
 # CFCore4j
+
 A simple yet effective wrapper library around CF Core API.
 
 Check their official docs to have a better time understanding what each method here does:
 https://docs.curseforge.com/
 
 ## Example Usage
+
 This example fetches
+
 ```java
 import org.zeith.cfcore4j.CFCore4j;
 import org.zeith.cfcore4j.CFCoreBuilder;
@@ -37,13 +40,17 @@ public class TestCFCore4j
 ```
 
 ## It's cool and all, but where do I get API keys?
+
 **[Here](https://console.curseforge.com/?#/api-keys)**
 
 #### Maven repository: https://maven.zeith.org
+
 #### Maven artifact: "org.zeith:CFCore4j:1.0.1"
 
 ## CFCore4j Dependency
+
 ### Gradle:
+
 ```groovy
 repositories {
     mavenCentral()
@@ -54,14 +61,28 @@ dependencies {
     implementation 'org.zeith:CFCore4j:1.0.1'
 }
 ```
-### Maven: 
+
+### Maven:
+
 ```xml
-<dependency>
-    <groupId>org.zeith</groupId>
-    <artifactId>CFCore4j</artifactId>
-    <version>1.0.1</version>
-    <type>pom</type>
-</dependency>
+
+<dependencies>
+    <dependency>
+        <groupId>org.zeith</groupId>
+        <artifactId>CFCore4j</artifactId>
+        <version>1.0.1</version>
+    </dependency>
+</dependencies>
+
+<repositories>
+<repository>
+    <id>zeith.org</id>
+    <name>Zeith's Repository</name>
+    <url>https://maven.zeith.org</url>
+</repository>
+</repositories>
 ```
+
 ### Jar library
+
 Download from [here](https://github.com/Zeitheron/CFCore4j/releases).
