@@ -2,8 +2,7 @@
 
 A simple yet effective wrapper library around CF Core API.
 
-Check their official docs to have a better time understanding what each method here does:
-https://docs.curseforge.com/
+Check their official docs to have a better time understanding what each method [here](https://docs.curseforge.com/) does.
 
 ## Example Usage
 
@@ -42,10 +41,6 @@ public class TestCFCore4j
 ## It's cool and all, but where do I get API keys?
 
 **[Here](https://console.curseforge.com/?#/api-keys)**
-
-#### Maven repository: https://maven.zeith.org
-
-#### Maven artifact: "org.zeith:CFCore4j:1.0.1"
 
 ## CFCore4j Dependency
 
