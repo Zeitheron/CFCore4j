@@ -6,11 +6,21 @@ import org.zeith.cfcore4j.errors.CFNotFoundException;
 import org.zeith.cfcore4j.query.IQueryContainer;
 import org.zeith.httplib.JSONHttpRequest;
 
+/**
+ * The heart of all calls to CFCore.
+ * An instance contains an API Key and a list of categories that can be accessed:
+ *
+ * @see Games
+ * @see Categories
+ * @see Mods
+ * @see Files
+ * @see Fingerprints
+ */
 public class CFCore4j
 {
 	static final String BASE_URL = "https://api.curseforge.com/v1/";
 
-	private final String apiToken;
+	private final String apiKey;
 
 	private final Games games = new Games(this);
 	private final Categories categories = new Categories(this);
@@ -18,9 +28,10 @@ public class CFCore4j
 	private final Files files = new Files(this);
 	private final Fingerprints fingerprints = new Fingerprints(this);
 
-	CFCore4j(String apiToken)
+	CFCore4j(String apiKey)
 	{
-		this.apiToken = apiToken;
+		this.apiKey = apiKey;
+		checkAuthentication();
 	}
 
 	public Games games()
@@ -48,11 +59,11 @@ public class CFCore4j
 		return fingerprints;
 	}
 
-	// INTERNAL USE ONLY
+	// INTERNAL USE ONLY //
 
 	void checkAuthentication()
 	{
-		if(apiToken == null || apiToken.isEmpty())
+		if(apiKey == null || apiKey.isEmpty())
 			throw new CFAuthenticationException("Missing API key!");
 	}
 
@@ -89,13 +100,13 @@ public class CFCore4j
 	JSONHttpRequest getAuth(String url)
 	{
 		return get(url)
-				.header("x-api-key", apiToken);
+				.header("x-api-key", apiKey);
 	}
 
 	JSONHttpRequest postAuth(String url)
 	{
 		return post(url)
-				.header("x-api-key", apiToken);
+				.header("x-api-key", apiKey);
 	}
 
 	JSONHttpRequest get(String url, IQueryContainer params)
@@ -106,6 +117,6 @@ public class CFCore4j
 	JSONHttpRequest getAuth(String url, IQueryContainer params)
 	{
 		return get(url, params)
-				.header("x-api-key", apiToken);
+				.header("x-api-key", apiKey);
 	}
 }

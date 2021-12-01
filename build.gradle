@@ -38,6 +38,11 @@ task srcJar(type: Jar, dependsOn: classes) {
     classifier = 'sources'
 }
 
+task javadocJar(type: Jar, dependsOn: classes) {
+    from javadoc
+    classifier = 'javadoc'
+}
+
 publishing {
     publications {
         maven(MavenPublication) {
@@ -56,6 +61,7 @@ publishing {
             }
 
             artifact srcJar
+            artifact javadocJar
         }
     }
     repositories {

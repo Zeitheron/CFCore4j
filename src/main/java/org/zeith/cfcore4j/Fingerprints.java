@@ -15,6 +15,14 @@ public class Fingerprints
 		this.core = core;
 	}
 
+	/**
+	 * Get mod files that match a list of fingerprints.
+	 *
+	 * @param req GetFingerprintsMatchesRequest
+	 * @return GetFingerprintsMatchesResponse
+	 * @see GetFingerprintsMatchesRequest
+	 * @see GetFingerprintsMatchesResponse
+	 */
 	public GetFingerprintsMatchesResponse getFingerprintsMatches(GetFingerprintsMatchesRequest req)
 	{
 		return new GetFingerprintsMatchesResponse(
@@ -26,6 +34,14 @@ public class Fingerprints
 		);
 	}
 
+	/**
+	 * Get mod files that match a list of fingerprints using fuzzy matching.
+	 *
+	 * @param req GetFingerprintsFuzzyMatchesRequest
+	 * @return GetFingerprintsFuzzyMatchesResponse
+	 * @see GetFingerprintsFuzzyMatchesRequest
+	 * @see GetFingerprintsFuzzyMatchesResponse
+	 */
 	public GetFingerprintsFuzzyMatchesResponse getFingerprintsFuzzyMatches(GetFingerprintsFuzzyMatchesRequest req)
 	{
 		return new GetFingerprintsFuzzyMatchesResponse(
