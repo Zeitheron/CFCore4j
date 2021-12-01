@@ -1,0 +1,66 @@
+plugins {
+    id 'java'
+    id 'maven-publish'
+}
+
+ext.configFile = file("build.txt")
+configFile.withReader {
+    def prop = new Properties()
+    prop.load(it)
+    project.ext.config = new ConfigSlurper().parse(prop)
+    project.ext.hasConfig = { String key ->
+        return config.isSet(key);
+    }
+}
+
+group 'org.zeith'
+version config.version
+
+repositories {
+    mavenCentral()
+    maven {
+        name = "Zeitheron Maven"
+        url = "https://maven.zeith.org"
+    }
+}
+
+dependencies {
+    implementation 'org.json:json:' + config.json
+    implementation 'org.zeith:HTTPLib:' + config.httplib
+}
+
+test {
+    useJUnitPlatform()
+}
+
+task srcJar(type: Jar, dependsOn: classes) {
+    from sourceSets.main.allSource
+    classifier = 'sources'
+}
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            groupId = 'org.zeith'
+            artifactId = 'CFCore4j'
+            version = config.version
+            from components.java
+
+            pom {
+                name = 'CFCore4j'
+                description = 'CFCore wrapper for Java 8+'
+                dependencies {
+                    implementation 'org.json:json:' + config.json
+                    implementation 'org.zeith:HTTPLib:' + config.httplib
+                }
+            }
+
+            artifact srcJar
+        }
+    }
+    repositories {
+        maven {
+            url "file:///SERVER//Maven"
+        }
+    }
+}
