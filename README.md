@@ -73,13 +73,16 @@ dependencies {
         <version>1.0.1</version>
     </dependency>
 </dependencies>
+```
+
+```xml
 
 <repositories>
-<repository>
-    <id>zeith.org</id>
-    <name>Zeith's Repository</name>
-    <url>https://maven.zeith.org</url>
-</repository>
+    <repository>
+        <id>zeith.org</id>
+        <name>Zeith's Repository</name>
+        <url>https://maven.zeith.org</url>
+    </repository>
 </repositories>
 ```
 
