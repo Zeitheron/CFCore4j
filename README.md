@@ -82,6 +82,6 @@ dependencies {
 </repositories>
 ```
 
-### Jar library
+### Jar library:
 
 Download from [here](https://github.com/Zeitheron/CFCore4j/releases).
