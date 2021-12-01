@@ -6,7 +6,8 @@ Check their official docs to have a better time understanding what each method [
 
 ## Example Usage
 
-This example fetches
+This example fetches Minecraft by it's game id, HammerLib by it's id, and a file by the file id.
+There are way more functions to see here and there, these are just a few.
 
 ```java
 import org.zeith.cfcore4j.CFCore4j;
