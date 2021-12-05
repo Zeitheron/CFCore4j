@@ -29,8 +29,8 @@ public class TestCFCore4j
 		System.out.println(minecraft.name + " (" + minecraft.slug + ")");
 
 		int modId = 247401;
-		Mod musicLayer = api.mods().getMod(modId);
-		System.out.println(musicLayer.name + " (" + musicLayer.slug + ")");
+		Mod hammerLib = api.mods().getMod(modId);
+		System.out.println(hammerLib.name + " (" + hammerLib.slug + ")");
 
 		int fileId = 3541718;
 		File file = api.files().getFiles(fileId).get(0);
@@ -54,7 +54,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'org.zeith:CFCore4j:1.0.1'
+    implementation 'org.zeith:CFCore4j:1.0.2'
 }
 ```
 
@@ -66,7 +66,7 @@ dependencies {
     <dependency>
         <groupId>org.zeith</groupId>
         <artifactId>CFCore4j</artifactId>
-        <version>1.0.1</version>
+        <version>1.0.2</version>
     </dependency>
 </dependencies>
 ```
