@@ -1,29 +1,36 @@
 package org.zeith.cfcore4j.games;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
+import org.zeith.cfcore4j.Games;
 import org.zeith.cfcore4j.Util;
+import org.zeith.cfcore4j.base.PaginatedResponse;
 import org.zeith.cfcore4j.schemas.Game;
-import org.zeith.cfcore4j.schemas.Pagination;
 
 import java.util.List;
 
 public class GetGamesResponse
+		extends PaginatedResponse<Game, GetGamesResponse>
 {
-	public final Pagination pagination;
-	public final List<Game> games;
+	final Games games;
+	final GetGamesRequest req;
 
-	public GetGamesResponse(JSONObject $)
+	public GetGamesResponse(Games games, GetGamesRequest req, JSONObject $)
 	{
-		this.pagination = new Pagination($.getJSONObject("pagination"));
-		this.games = Util.parseList($.getJSONArray("data"), Game::new);
+		super($);
+		this.games = games;
+		this.req = req.clone();
 	}
 
 	@Override
-	public String toString()
+	protected List<Game> decodeData(JSONArray data)
 	{
-		return "GetGamesResponse{" +
-				"pagination=" + pagination +
-				", games=" + games +
-				'}';
+		return Util.parseList(data, Game::new);
+	}
+
+	@Override
+	public GetGamesResponse fromIndex(int index)
+	{
+		return games.getGames(req.clone().index(index));
 	}
 }

@@ -1,29 +1,36 @@
 package org.zeith.cfcore4j.files;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
+import org.zeith.cfcore4j.Files;
 import org.zeith.cfcore4j.Util;
+import org.zeith.cfcore4j.base.PaginatedResponse;
 import org.zeith.cfcore4j.schemas.File;
-import org.zeith.cfcore4j.schemas.Pagination;
 
 import java.util.List;
 
 public class GetModFilesResponse
+		extends PaginatedResponse<File, GetModFilesResponse>
 {
-	public final Pagination pagination;
-	public final List<File> files;
+	final Files files;
+	final GetModFilesRequest req;
 
-	public GetModFilesResponse(JSONObject $)
+	public GetModFilesResponse(Files files, GetModFilesRequest req, JSONObject $)
 	{
-		this.pagination = new Pagination($.getJSONObject("pagination"));
-		this.files = Util.parseList($.getJSONArray("data"), File::new);
+		super($);
+		this.files = files;
+		this.req = req.clone();
 	}
 
 	@Override
-	public String toString()
+	protected List<File> decodeData(JSONArray data)
 	{
-		return "GetModFilesResponse{" +
-				"pagination=" + pagination +
-				", games=" + files +
-				'}';
+		return Util.parseList(data, File::new);
+	}
+
+	@Override
+	public GetModFilesResponse fromIndex(int index)
+	{
+		return files.getModFiles(req.clone().index(index));
 	}
 }

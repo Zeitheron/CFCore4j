@@ -23,10 +23,10 @@ public class Category
 		this.id = $.getInt("id");
 		this.gameId = $.getInt("gameId");
 		this.name = $.getString("name");
-		this.slug = $.getString("slug");
+		this.slug = $.optString("slug");
 		this.url = $.optString("url");
 		this.iconUrl = $.getString("iconUrl");
-		this.dateModified = Util.parseDateTime($.getString("dateModified"));
+		this.dateModified = Util.parseDateTime($.optString("dateModified"));
 		this.isClass = new Nullable<>($.isNull("isClass") ? null : $.optBoolean("isClass"));
 		this.classId = new Nullable<>($.isNull("classId") ? null : $.optInt("classId"));
 		this.parentCategoryId = new Nullable<>($.isNull("parentCategoryId") ? null : $.optInt("parentCategoryId"));

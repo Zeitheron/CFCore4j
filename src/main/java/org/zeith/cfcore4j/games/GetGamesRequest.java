@@ -33,4 +33,13 @@ public class GetGamesRequest
 				.put("index", index)
 				.put("pageSize", pageSize);
 	}
+
+	@Override
+	public GetGamesRequest clone()
+	{
+		GetGamesRequest r = new GetGamesRequest();
+		r.index = index;
+		r.pageSize = pageSize;
+		return r;
+	}
 }

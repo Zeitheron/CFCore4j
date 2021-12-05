@@ -1,29 +1,36 @@
 package org.zeith.cfcore4j.mods;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
+import org.zeith.cfcore4j.Mods;
 import org.zeith.cfcore4j.Util;
+import org.zeith.cfcore4j.base.PaginatedResponse;
 import org.zeith.cfcore4j.schemas.Mod;
-import org.zeith.cfcore4j.schemas.Pagination;
 
 import java.util.List;
 
 public class SearchModsResponse
+		extends PaginatedResponse<Mod, SearchModsResponse>
 {
-	public final List<Mod> data;
-	public final Pagination pagination;
+	private final Mods mods;
+	private final SearchModsRequest req;
 
-	public SearchModsResponse(JSONObject $)
+	public SearchModsResponse(Mods mods, SearchModsRequest req, JSONObject $)
 	{
-		this.data = Util.parseList($.getJSONArray("data"), Mod::new);
-		this.pagination = new Pagination($.getJSONObject("pagination"));
+		super($);
+		this.mods = mods;
+		this.req = req.clone();
 	}
 
 	@Override
-	public String toString()
+	protected List<Mod> decodeData(JSONArray data)
 	{
-		return "SearchModsResponse{" +
-				"data=" + data +
-				", pagination=" + pagination +
-				'}';
+		return Util.parseList(data, Mod::new);
+	}
+
+	@Override
+	public SearchModsResponse fromIndex(int index)
+	{
+		return mods.searchMods(req.clone().index(index));
 	}
 }

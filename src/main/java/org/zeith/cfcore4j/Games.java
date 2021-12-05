@@ -26,7 +26,7 @@ public class Games
 	 */
 	public GetGamesResponse getGames(GetGamesRequest req)
 	{
-		return new GetGamesResponse(
+		return new GetGamesResponse(this, req,
 				core.checkValid("Game List",
 						core.getAuth("games", req)
 				).jsonObjectBody()

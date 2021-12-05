@@ -108,4 +108,22 @@ public class SearchModsRequest
 				.put("index", index)
 				.put("pageSize", pageSize);
 	}
+
+	@Override
+	public SearchModsRequest clone()
+	{
+		SearchModsRequest r = new SearchModsRequest();
+		r.gameId = gameId;
+		r.classId = classId;
+		r.categoryId = categoryId;
+		r.gameVersion = gameVersion;
+		r.searchFilter = searchFilter;
+		r.sortField = sortField;
+		r.sortOrder = sortOrder;
+		r.modLoaderType = modLoaderType;
+		r.gameVersionTypeId = gameVersionTypeId;
+		r.index = index;
+		r.pageSize = pageSize;
+		return r;
+	}
 }

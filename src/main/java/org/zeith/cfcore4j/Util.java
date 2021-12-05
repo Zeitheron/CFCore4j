@@ -3,6 +3,7 @@ package org.zeith.cfcore4j;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.time.DateTimeException;
 import java.time.Instant;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
@@ -14,7 +15,14 @@ public class Util
 {
 	public static Instant parseDateTime(String dateTime)
 	{
-		return Instant.from(DateTimeFormatter.ISO_DATE_TIME.parse(dateTime));
+		if(dateTime == null || dateTime.isEmpty()) return null;
+		try
+		{
+			return Instant.from(DateTimeFormatter.ISO_DATE_TIME.parse(dateTime));
+		} catch(DateTimeException e)
+		{
+			return null;
+		}
 	}
 
 	public static <T> List<T> parseList(JSONArray array, Function<JSONObject, T> factory)

@@ -26,7 +26,7 @@ public class Mods
 	 */
 	public SearchModsResponse searchMods(SearchModsRequest req)
 	{
-		return new SearchModsResponse(
+		return new SearchModsResponse(this, req,
 				core.checkValid("Search Mods",
 						core.getAuth("mods/search", req)
 				).jsonObjectBody()

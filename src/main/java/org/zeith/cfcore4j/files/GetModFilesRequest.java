@@ -58,4 +58,14 @@ public class GetModFilesRequest
 				.put("index", index)
 				.put("pageSize", pageSize);
 	}
+
+	@Override
+	public GetModFilesRequest clone()
+	{
+		GetModFilesRequest r = new GetModFilesRequest(modId);
+		r.gameVersionTypeId = gameVersionTypeId;
+		r.index = index;
+		r.pageSize = pageSize;
+		return r;
+	}
 }

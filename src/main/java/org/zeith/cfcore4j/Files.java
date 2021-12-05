@@ -36,7 +36,7 @@ public class Files
 	/**
 	 * Get a single file of the specified mod.
 	 *
-	 * @param modId The mod to get file for.
+	 * @param modId  The mod to get file for.
 	 * @param fileId The file id to get.
 	 * @return An instance of a file
 	 * @see GetModFileRequest
@@ -57,7 +57,7 @@ public class Files
 	 */
 	public GetModFilesResponse getModFiles(GetModFilesRequest req)
 	{
-		return new GetModFilesResponse(
+		return new GetModFilesResponse(this, req,
 				core.checkValid("Mod " + req.modId() + " Files",
 						core.getAuth("mods/" + req.modId() + "/files", req)
 				).jsonObjectBody()
