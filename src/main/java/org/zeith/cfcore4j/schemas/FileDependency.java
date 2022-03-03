@@ -11,7 +11,7 @@ public class FileDependency
 	public FileDependency(JSONObject $)
 	{
 		this.modId = $.getInt("modId");
-		this.fileId = $.getInt("fileId");
+		this.fileId = $.optInt("fileId");
 		this.relationType = FileRelationType.fromJson($.getInt("relationType"));
 	}
 

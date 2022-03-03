@@ -65,6 +65,19 @@ public class Files
 	}
 
 	/**
+	 * Get all files of the specified mod.
+	 *
+	 * @param modId The mod id.
+	 * @return GetModFilesResponse
+	 * @see GetModFilesRequest
+	 * @see GetModFilesResponse
+	 */
+	public GetModFilesResponse getModFiles(int modId)
+	{
+		return getModFiles(GetModFilesRequest.create(modId));
+	}
+
+	/**
 	 * Get a list of files.
 	 *
 	 * @param req GetFilesRequest
