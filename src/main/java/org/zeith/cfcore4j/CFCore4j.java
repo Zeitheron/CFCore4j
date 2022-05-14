@@ -6,6 +6,8 @@ import org.zeith.cfcore4j.errors.CFNotFoundException;
 import org.zeith.cfcore4j.query.IQueryContainer;
 import org.zeith.httplib.JSONHttpRequest;
 
+import java.util.function.UnaryOperator;
+
 /**
  * The heart of all calls to CFCore.
  * An instance contains an API Key and a list of categories that can be accessed:
@@ -27,10 +29,13 @@ public class CFCore4j
 	private final Mods mods = new Mods(this);
 	private final Files files = new Files(this);
 	private final Fingerprints fingerprints = new Fingerprints(this);
+	
+	private final UnaryOperator<JSONHttpRequest> requestTransformator;
 
-	CFCore4j(String apiKey)
+	CFCore4j(String apiKey, UnaryOperator<JSONHttpRequest> requestTransformator)
 	{
 		this.apiKey = apiKey;
+		this.requestTransformator = requestTransformator;
 		checkAuthentication();
 	}
 
@@ -89,12 +94,12 @@ public class CFCore4j
 
 	JSONHttpRequest get(String url)
 	{
-		return JSONHttpRequest.get(BASE_URL + url);
+		return requestTransformator.apply(JSONHttpRequest.get(BASE_URL + url));
 	}
 
 	JSONHttpRequest post(String url)
 	{
-		return JSONHttpRequest.post(BASE_URL + url);
+		return requestTransformator.apply(JSONHttpRequest.post(BASE_URL + url));
 	}
 
 	JSONHttpRequest getAuth(String url)
