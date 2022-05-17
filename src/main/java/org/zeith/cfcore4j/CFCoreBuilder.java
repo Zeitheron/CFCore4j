@@ -2,6 +2,7 @@ package org.zeith.cfcore4j;
 
 import org.zeith.httplib.JSONHttpRequest;
 
+import java.util.Map;
 import java.util.function.Function;
 import java.util.function.UnaryOperator;
 
@@ -32,6 +33,13 @@ public class CFCoreBuilder
 	{
 		if(userAgent != null && !userAgent.isEmpty())
 			requestTransformator = requestTransformator.andThen(e -> e.userAgent(userAgent));
+		return this;
+	}
+	
+	public CFCoreBuilder addHeaders(Map<String, String> headers)
+	{
+		if(headers != null && !headers.isEmpty())
+			requestTransformator = requestTransformator.andThen(e -> e.headers(headers));
 		return this;
 	}
 	

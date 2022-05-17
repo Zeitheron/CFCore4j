@@ -54,7 +54,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'org.zeith:CFCore4j:1.0.2'
+    implementation 'org.zeith:CFCore4j:1.0.5'
 }
 ```
 
@@ -66,7 +66,7 @@ dependencies {
     <dependency>
         <groupId>org.zeith</groupId>
         <artifactId>CFCore4j</artifactId>
-        <version>1.0.2</version>
+        <version>1.0.5</version>
     </dependency>
 </dependencies>
 ```

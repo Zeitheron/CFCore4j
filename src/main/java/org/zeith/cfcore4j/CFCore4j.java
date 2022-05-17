@@ -79,7 +79,7 @@ public class CFCore4j
 			if(req.code() == 403)
 			{
 				checkAuthentication();
-				throw new CFAuthenticationException("Invalid API key!");
+				throw new CFAuthenticationException("Invalid API key! " + req.body());
 			} else if(req.notFound())
 			{
 				throw new CFNotFoundException(query + " not found.");

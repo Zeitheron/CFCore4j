@@ -1,4 +1,4 @@
 
-version=1.0.4
+version=1.0.5
 json=20210307
 httplib=1.0.1
