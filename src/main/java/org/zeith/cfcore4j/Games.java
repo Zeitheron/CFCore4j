@@ -10,12 +10,12 @@ import java.util.List;
 public class Games
 {
 	final CFCore4j core;
-
+	
 	public Games(CFCore4j core)
 	{
 		this.core = core;
 	}
-
+	
 	/**
 	 * Get all games that are available to the provided API key.
 	 *
@@ -27,12 +27,14 @@ public class Games
 	public GetGamesResponse getGames(GetGamesRequest req)
 	{
 		return new GetGamesResponse(this, req,
-				core.checkValid("Game List",
-						core.getAuth("games", req)
-				).jsonObjectBody()
+				core.getCachedJSON("games", req, () ->
+						core.checkValid("Game List",
+								core.getAuth("games", req)
+						)
+				)
 		);
 	}
-
+	
 	/**
 	 * Get a single game. A private game is only accessible by its respective API key.
 	 *
@@ -44,12 +46,14 @@ public class Games
 	public GetGameResponse getGame(GetGameRequest req)
 	{
 		return new GetGameResponse(
-				core.checkValid("Game " + req.gameId(),
-						core.getAuth("games/" + req.gameId())
-				).jsonObjectBody()
+				core.getCachedJSON("games/" + req.gameId(), () ->
+						core.checkValid("Game " + req.gameId(),
+								core.getAuth("games/" + req.gameId())
+						)
+				)
 		);
 	}
-
+	
 	/**
 	 * Get a single game. A private game is only accessible by its respective API key.
 	 *
@@ -61,7 +65,7 @@ public class Games
 	{
 		return getGame(GetGameRequest.create(gameId)).game;
 	}
-
+	
 	/**
 	 * Get all available versions for each known version type of the specified game. A private game is only accessible to its respective API key.
 	 *
@@ -73,12 +77,14 @@ public class Games
 	public GetVersionsResponse getVersions(GetVersionsRequest req)
 	{
 		return new GetVersionsResponse(
-				core.checkValid("Game " + req.gameId() + " versions",
-						core.getAuth("games/" + req.gameId() + "/versions")
-				).jsonObjectBody()
+				core.getCachedJSON("games/" + req.gameId() + "/versions", () ->
+						core.checkValid("Game " + req.gameId() + " versions",
+								core.getAuth("games/" + req.gameId() + "/versions")
+						)
+				)
 		);
 	}
-
+	
 	/**
 	 * Get all available versions for each known version type of the specified game. A private game is only accessible to its respective API key.
 	 *
@@ -90,7 +96,7 @@ public class Games
 	{
 		return getVersions(GetVersionsRequest.create(gameId)).data;
 	}
-
+	
 	/**
 	 * Get all available version types of the specified game.
 	 * <p>
@@ -106,12 +112,14 @@ public class Games
 	public GetVersionTypesResponse getVersionTypes(GetVersionTypesRequest req)
 	{
 		return new GetVersionTypesResponse(
-				core.checkValid("Game " + req.gameId() + " version types",
-						core.getAuth("games/" + req.gameId() + "/version-types")
-				).jsonObjectBody()
+				core.getCachedJSON("games/" + req.gameId() + "/version-types", () ->
+						core.checkValid("Game " + req.gameId() + " version types",
+								core.getAuth("games/" + req.gameId() + "/version-types")
+						)
+				)
 		);
 	}
-
+	
 	/**
 	 * Get all available version types of the specified game.
 	 * <p>

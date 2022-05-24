@@ -9,12 +9,12 @@ import org.zeith.httplib.HttpRequest;
 public class Fingerprints
 {
 	final CFCore4j core;
-
+	
 	public Fingerprints(CFCore4j core)
 	{
 		this.core = core;
 	}
-
+	
 	/**
 	 * Get mod files that match a list of fingerprints.
 	 *
@@ -26,14 +26,16 @@ public class Fingerprints
 	public GetFingerprintsMatchesResponse getFingerprintsMatches(GetFingerprintsMatchesRequest req)
 	{
 		return new GetFingerprintsMatchesResponse(
-				core.checkValid("Fingerprints " + req.fingerprints(),
-						core.postAuth("fingerprints")
-								.contentType(HttpRequest.CONTENT_TYPE_JSON)
-								.send(req.toString())
-				).jsonObjectBody()
+				core.getCachedJSON("fingerprints\n" + req.toString(), () ->
+						core.checkValid("Fingerprints " + req.fingerprints(),
+								core.postAuth("fingerprints")
+										.contentType(HttpRequest.CONTENT_TYPE_JSON)
+										.send(req.toString())
+						)
+				)
 		);
 	}
-
+	
 	/**
 	 * Get mod files that match a list of fingerprints using fuzzy matching.
 	 *
@@ -45,11 +47,13 @@ public class Fingerprints
 	public GetFingerprintsFuzzyMatchesResponse getFingerprintsFuzzyMatches(GetFingerprintsFuzzyMatchesRequest req)
 	{
 		return new GetFingerprintsFuzzyMatchesResponse(
-				core.checkValid("Fuzzy Fingerprints",
-						core.postAuth("fingerprints/fuzzy")
-								.contentType(HttpRequest.CONTENT_TYPE_JSON)
-								.send(req.toString())
-				).jsonObjectBody()
+				core.getCachedJSON("fingerprints/fuzzy\n" + req.toString(), () ->
+						core.checkValid("Fuzzy Fingerprints",
+								core.postAuth("fingerprints/fuzzy")
+										.contentType(HttpRequest.CONTENT_TYPE_JSON)
+										.send(req.toString())
+						)
+				)
 		);
 	}
 }

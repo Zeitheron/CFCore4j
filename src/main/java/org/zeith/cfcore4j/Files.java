@@ -10,12 +10,12 @@ import java.util.List;
 public class Files
 {
 	final CFCore4j core;
-
+	
 	public Files(CFCore4j core)
 	{
 		this.core = core;
 	}
-
+	
 	/**
 	 * Get a single file of the specified mod.
 	 *
@@ -27,12 +27,14 @@ public class Files
 	public GetModFileResponse getModFile(GetModFileRequest req)
 	{
 		return new GetModFileResponse(
-				core.checkValid("Mod " + req.modId() + " File " + req.fileId(),
-						core.getAuth("mods/" + req.modId() + "/files/" + req.fileId())
-				).jsonObjectBody()
+				core.getCachedJSON("mods/" + req.modId() + "/files/" + req.fileId(), () ->
+						core.checkValid("Mod " + req.modId() + " File " + req.fileId(),
+								core.getAuth("mods/" + req.modId() + "/files/" + req.fileId())
+						)
+				)
 		);
 	}
-
+	
 	/**
 	 * Get a single file of the specified mod.
 	 *
@@ -46,7 +48,7 @@ public class Files
 	{
 		return getModFile(GetModFileRequest.create(modId, fileId)).data;
 	}
-
+	
 	/**
 	 * Get all files of the specified mod.
 	 *
@@ -58,12 +60,14 @@ public class Files
 	public GetModFilesResponse getModFiles(GetModFilesRequest req)
 	{
 		return new GetModFilesResponse(this, req,
-				core.checkValid("Mod " + req.modId() + " Files",
-						core.getAuth("mods/" + req.modId() + "/files", req)
-				).jsonObjectBody()
+				core.getCachedJSON("mods/" + req.modId() + "/files", req, () ->
+						core.checkValid("Mod " + req.modId() + " Files",
+								core.getAuth("mods/" + req.modId() + "/files", req)
+						)
+				)
 		);
 	}
-
+	
 	/**
 	 * Get all files of the specified mod.
 	 *
@@ -76,7 +80,7 @@ public class Files
 	{
 		return getModFiles(GetModFilesRequest.create(modId));
 	}
-
+	
 	/**
 	 * Get a list of files.
 	 *
@@ -88,14 +92,16 @@ public class Files
 	public GetFilesResponse getFiles(GetFilesRequest req)
 	{
 		return new GetFilesResponse(
-				core.checkValid("Files " + req.fileIds(),
-						core.postAuth("mods/files")
-								.contentType(HttpRequest.CONTENT_TYPE_JSON)
-								.send(req.toString())
-				).jsonObjectBody()
+				core.getCachedJSON("mods/files\n" + req.toString(), () ->
+						core.checkValid("Files " + req.fileIds(),
+								core.postAuth("mods/files")
+										.contentType(HttpRequest.CONTENT_TYPE_JSON)
+										.send(req.toString())
+						)
+				)
 		);
 	}
-
+	
 	/**
 	 * Get a list of files.
 	 *
@@ -108,7 +114,7 @@ public class Files
 	{
 		return getFiles(GetFilesRequest.create().addFile(fileIds)).data;
 	}
-
+	
 	/**
 	 * Get a list of files.
 	 *
@@ -121,7 +127,7 @@ public class Files
 	{
 		return getFiles(GetFilesRequest.create().addFile(fileIds)).data;
 	}
-
+	
 	/**
 	 * Get a list of files.
 	 *
@@ -134,7 +140,7 @@ public class Files
 	{
 		return getFiles(GetFilesRequest.create().addFile(fileIds)).data;
 	}
-
+	
 	/**
 	 * Get the changelog of a file in HTML format.
 	 *
@@ -146,12 +152,14 @@ public class Files
 	public GetModFileChangelogResponse getModFileChangelog(GetModFileChangelogRequest req)
 	{
 		return new GetModFileChangelogResponse(
-				core.checkValid("Mod " + req.modId() + " File " + req.fileId() + " Changelog",
-						core.getAuth("mods/" + req.modId() + "/files/" + req.fileId() + "/changelog")
-				).jsonObjectBody()
+				core.getCachedJSON("mods/" + req.modId() + "/files/" + req.fileId() + "/changelog", () ->
+						core.checkValid("Mod " + req.modId() + " File " + req.fileId() + " Changelog",
+								core.getAuth("mods/" + req.modId() + "/files/" + req.fileId() + "/changelog")
+						)
+				)
 		);
 	}
-
+	
 	/**
 	 * Get the changelog of a file in HTML format.
 	 *
@@ -164,7 +172,7 @@ public class Files
 	{
 		return getModFileChangelog(GetModFileChangelogRequest.create(modId, fileId)).data;
 	}
-
+	
 	/**
 	 * Get a download url for a specific file.
 	 * <p>
@@ -180,12 +188,14 @@ public class Files
 	public GetModFileDownloadURLResponse getModFileDownloadURL(GetModFileDownloadURLRequest req)
 	{
 		return new GetModFileDownloadURLResponse(
-				core.checkValid("Mod " + req.modId() + " File " + req.fileId() + " Download URL",
-						core.getAuth("mods/" + req.modId() + "/files/" + req.fileId() + "/download-url")
-				).jsonObjectBody()
+				core.getCachedJSON("mods/" + req.modId() + "/files/" + req.fileId() + "/download-url", () ->
+						core.checkValid("Mod " + req.modId() + " File " + req.fileId() + " Download URL",
+								core.getAuth("mods/" + req.modId() + "/files/" + req.fileId() + "/download-url")
+						)
+				)
 		);
 	}
-
+	
 	/**
 	 * Get a download url for a specific file.
 	 * <p>

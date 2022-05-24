@@ -10,12 +10,12 @@ import java.util.List;
 public class Mods
 {
 	final CFCore4j core;
-
+	
 	public Mods(CFCore4j core)
 	{
 		this.core = core;
 	}
-
+	
 	/**
 	 * Get all mods that match the search criteria.
 	 *
@@ -27,12 +27,14 @@ public class Mods
 	public SearchModsResponse searchMods(SearchModsRequest req)
 	{
 		return new SearchModsResponse(this, req,
-				core.checkValid("Search Mods",
-						core.getAuth("mods/search", req)
-				).jsonObjectBody()
+				core.getCachedJSON("mods/search", req, () ->
+						core.checkValid("Search Mods",
+								core.getAuth("mods/search", req)
+						)
+				)
 		);
 	}
-
+	
 	/**
 	 * Get a single mod.
 	 *
@@ -44,12 +46,14 @@ public class Mods
 	public GetModResponse getMod(GetModRequest req)
 	{
 		return new GetModResponse(
-				core.checkValid("Mod " + req.modId(),
-						core.getAuth("mods/" + req.modId())
-				).jsonObjectBody()
+				core.getCachedJSON("mods/" + req.modId(), () ->
+						core.checkValid("Mod " + req.modId(),
+								core.getAuth("mods/" + req.modId())
+						)
+				)
 		);
 	}
-
+	
 	/**
 	 * Get a single mod.
 	 *
@@ -61,7 +65,7 @@ public class Mods
 	{
 		return getMod(GetModRequest.create(modId)).data;
 	}
-
+	
 	/**
 	 * Get a list of mods.
 	 *
@@ -73,14 +77,16 @@ public class Mods
 	public GetModsResponse getMods(GetModsRequest req)
 	{
 		return new GetModsResponse(
-				core.checkValid("Mods " + req.modIds(),
-						core.postAuth("mods")
-								.contentType(HttpRequest.CONTENT_TYPE_JSON)
-								.send(req.toString())
-				).jsonObjectBody()
+				core.getCachedJSON("mods\n" + req.toString(), () ->
+						core.checkValid("Mods " + req.modIds(),
+								core.postAuth("mods")
+										.contentType(HttpRequest.CONTENT_TYPE_JSON)
+										.send(req.toString())
+						)
+				)
 		);
 	}
-
+	
 	/**
 	 * Get a list of mods.
 	 *
@@ -92,7 +98,7 @@ public class Mods
 	{
 		return getMods(GetModsRequest.create().addMod(modIds)).data;
 	}
-
+	
 	/**
 	 * Get a list of mods.
 	 *
@@ -104,7 +110,7 @@ public class Mods
 	{
 		return getMods(GetModsRequest.create().addMod(modIds)).data;
 	}
-
+	
 	/**
 	 * Get a list of mods.
 	 *
@@ -116,7 +122,7 @@ public class Mods
 	{
 		return getMods(GetModsRequest.create().addMod(modIds)).data;
 	}
-
+	
 	/**
 	 * Get a list of featured, popular and recently updated mods.
 	 *
@@ -128,14 +134,16 @@ public class Mods
 	public GetFeaturedModsResponse getFeaturedMods(GetFeaturedModsRequest req)
 	{
 		return new GetFeaturedModsResponse(
-				core.checkValid("Featured Mods",
-						core.postAuth("mods/featured")
-								.contentType(HttpRequest.CONTENT_TYPE_JSON)
-								.send(req.toString())
-				).jsonObjectBody()
+				core.getCachedJSON("mods/featured\n" + req.toString(), () ->
+						core.checkValid("Featured Mods",
+								core.postAuth("mods/featured")
+										.contentType(HttpRequest.CONTENT_TYPE_JSON)
+										.send(req.toString())
+						)
+				)
 		);
 	}
-
+	
 	/**
 	 * Get the full description of a mod in HTML format.
 	 *
@@ -147,12 +155,14 @@ public class Mods
 	public GetModDescriptionResponse getModDescription(GetModDescriptionRequest req)
 	{
 		return new GetModDescriptionResponse(
-				core.checkValid("Mod " + req.modId() + " Description",
-						core.getAuth("mods/" + req.modId() + "/description")
-				).jsonObjectBody()
+				core.getCachedJSON("mods/" + req.modId() + "/description", () ->
+						core.checkValid("Mod " + req.modId() + " Description",
+								core.getAuth("mods/" + req.modId() + "/description")
+						)
+				)
 		);
 	}
-
+	
 	/**
 	 * Get the full description of a mod in HTML format.
 	 *

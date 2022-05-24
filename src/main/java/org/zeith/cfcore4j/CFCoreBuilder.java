@@ -1,5 +1,7 @@
 package org.zeith.cfcore4j;
 
+import org.zeith.cfcore4j.base.HTTPCache;
+import org.zeith.cfcore4j.guava.RateLimiter;
 import org.zeith.httplib.JSONHttpRequest;
 
 import java.util.Map;
@@ -15,10 +17,24 @@ public class CFCoreBuilder
 {
 	private Function<JSONHttpRequest, JSONHttpRequest> requestTransformator = UnaryOperator.identity();
 	private String apiKey;
+	private HTTPCache cache;
+	private RateLimiter rateLimiter;
 	
 	public CFCoreBuilder authorize(String apiKey)
 	{
 		this.apiKey = apiKey;
+		return this;
+	}
+	
+	public CFCoreBuilder cache(HTTPCache cache)
+	{
+		this.cache = cache;
+		return this;
+	}
+	
+	public CFCoreBuilder rateLimit(RateLimiter rateLimiter)
+	{
+		this.rateLimiter = rateLimiter;
 		return this;
 	}
 	
@@ -45,6 +61,6 @@ public class CFCoreBuilder
 	
 	public CFCore4j build()
 	{
-		return new CFCore4j(apiKey, e -> requestTransformator.apply(e));
+		return new CFCore4j(apiKey, cache, rateLimiter, e -> requestTransformator.apply(e));
 	}
 }
