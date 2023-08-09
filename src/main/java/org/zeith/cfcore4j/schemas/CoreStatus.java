@@ -20,7 +20,11 @@ public enum CoreStatus
 
 	public static CoreStatus fromJson(int i)
 	{
-		if(i < 1 || i > VALUES.length) return UNKNOWN;
+		if(i < 1 || i >= VALUES.length)
+		{
+			System.err.println("Found unknown " + UNKNOWN.getClass().getSimpleName() + " ordinal: " + i);
+			return UNKNOWN;
+		}
 		return VALUES[i - 1];
 	}
 }
