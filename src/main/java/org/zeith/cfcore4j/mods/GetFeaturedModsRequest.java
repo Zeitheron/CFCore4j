@@ -2,55 +2,52 @@ package org.zeith.cfcore4j.mods;
 
 import org.json.JSONObject;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 public class GetFeaturedModsRequest
 {
-	private Integer gameId;
-	private final List<Integer> excludedModIds = new ArrayList<>();
-	private Integer gameVersionTypeId;
+	private Long gameId;
+	private final List<Long> excludedModIds = new ArrayList<>();
+	private Long gameVersionTypeId;
 
 	public static GetFeaturedModsRequest create()
 	{
 		return new GetFeaturedModsRequest();
 	}
 
-	public GetFeaturedModsRequest gameId(Integer gameId)
+	public GetFeaturedModsRequest gameId(Long gameId)
 	{
 		this.gameId = gameId;
 		return this;
 	}
 
-	public GetFeaturedModsRequest gameVersionTypeId(Integer gameVersionTypeId)
+	public GetFeaturedModsRequest gameVersionTypeId(Long gameVersionTypeId)
 	{
 		this.gameVersionTypeId = gameVersionTypeId;
 		return this;
 	}
 
-	public GetFeaturedModsRequest addExcludedMod(int... modId)
+	public GetFeaturedModsRequest addExcludedMod(long... modId)
 	{
-		for(int i : modId)
+		for(long i : modId)
 			excludedModIds.add(i);
 		return this;
 	}
 
-	public GetFeaturedModsRequest addExcludedMod(Collection<Integer> modId)
+	public GetFeaturedModsRequest addExcludedMod(Collection<Long> modId)
 	{
 		excludedModIds.addAll(modId);
 		return this;
 	}
 
-	public GetFeaturedModsRequest addExcludedMod(Iterable<Integer> modId)
+	public GetFeaturedModsRequest addExcludedMod(Iterable<Long> modId)
 	{
-		for(int i : modId)
+		for(long i : modId)
 			excludedModIds.add(i);
 		return this;
 	}
 
-	public List<Integer> excludedModIds()
+	public List<Long> excludedModIds()
 	{
 		return Collections.unmodifiableList(excludedModIds);
 	}

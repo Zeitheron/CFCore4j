@@ -18,30 +18,33 @@ public class Categories
 	/**
 	 * Get all available classes and categories of the specified game. Specify a game id for a list of all game categories, or a class id for a list of categories under that class.
 	 *
-	 * @param req GetCategoriesRequest
+	 * @param req
+	 * 		GetCategoriesRequest
+	 *
 	 * @return GetCategoriesResponse
+	 *
 	 * @see GetCategoriesRequest
 	 * @see GetCategoriesResponse
 	 */
 	public GetCategoriesResponse getCategories(GetCategoriesRequest req)
 	{
 		return new GetCategoriesResponse(
-				core.getCachedJSON("categories", req, () ->
-						core.checkValid("Categories",
-								core.getAuth("categories", req)
-						)
-				)
+				core.request(1, "categories", req, "Categories")
+						.get()
 		);
 	}
 	
 	/**
 	 * Get all available classes and categories of the specified game. Specify a game id for a list of all game categories, or a class id for a list of categories under that class.
 	 *
-	 * @param gameId The game to get categories for.
+	 * @param gameId
+	 * 		The game to get categories for.
+	 *
 	 * @return A list of categories
+	 *
 	 * @see Category
 	 */
-	public List<Category> getCategories(int gameId)
+	public List<Category> getCategories(long gameId)
 	{
 		return getCategories(GetCategoriesRequest.create().gameId(gameId)).data;
 	}
@@ -49,12 +52,16 @@ public class Categories
 	/**
 	 * Get all available classes and categories of the specified game. Specify a game id for a list of all game categories, or a class id for a list of categories under that class.
 	 *
-	 * @param gameId  The game to get categories for.
-	 * @param classId The class to get categories for.
+	 * @param gameId
+	 * 		The game to get categories for.
+	 * @param classId
+	 * 		The class to get categories for.
+	 *
 	 * @return A list of categories
+	 *
 	 * @see Category
 	 */
-	public List<Category> getCategories(int gameId, int classId)
+	public List<Category> getCategories(long gameId, long classId)
 	{
 		return getCategories(GetCategoriesRequest.create().gameId(gameId).classId(classId)).data;
 	}

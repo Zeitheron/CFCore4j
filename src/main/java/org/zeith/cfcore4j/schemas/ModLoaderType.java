@@ -8,7 +8,7 @@ public enum ModLoaderType
 	LITE_LOADER, // 3
 	FABRIC, // 4
 	QUILT, // 5
-	NEOFORGED, // 6
+	NEOFORGE, // 6
 	UNKNOWN; // 7
 
 	private static final ModLoaderType[] VALUES = values();

@@ -1,13 +1,13 @@
 package org.zeith.cfcore4j.schemas;
 
-public enum ModsSearchSortOrder
+public enum SortOrder
 {
 	ASCENDING("asc"),
 	DESCENDING("desc");
 
 	final String kind;
 
-	ModsSearchSortOrder(String kind)
+	SortOrder(String kind)
 	{
 		this.kind = kind;
 	}

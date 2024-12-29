@@ -11,7 +11,7 @@ public class SortableGameVersion
 	public final String gameVersionPadded;
 	public final String gameVersion;
 	public final Instant gameVersionReleaseDate;
-	public final Nullable<Integer> gameVersionTypeId;
+	public final Nullable<Long> gameVersionTypeId;
 
 	public SortableGameVersion(JSONObject $)
 	{
@@ -19,7 +19,7 @@ public class SortableGameVersion
 		this.gameVersionPadded = $.getString("gameVersionPadded");
 		this.gameVersion = $.getString("gameVersion");
 		this.gameVersionReleaseDate = Util.parseDateTime($.getString("gameVersionReleaseDate"));
-		this.gameVersionTypeId = new Nullable<>($.isNull("gameVersionTypeId") ? null : $.getInt("gameVersionTypeId"));
+		this.gameVersionTypeId = new Nullable<>($.isNull("gameVersionTypeId") ? null : $.getLong("gameVersionTypeId"));
 	}
 
 	@Override

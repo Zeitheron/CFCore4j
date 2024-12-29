@@ -9,34 +9,34 @@ import java.util.List;
 
 public class GetModsRequest
 {
-	private final List<Integer> modIds = new ArrayList<>();
+	private final List<Long> modIds = new ArrayList<>();
 
 	public static GetModsRequest create()
 	{
 		return new GetModsRequest();
 	}
 
-	public GetModsRequest addMod(int... modId)
+	public GetModsRequest addMod(long... modId)
 	{
-		for(int i : modId)
+		for(long i : modId)
 			modIds.add(i);
 		return this;
 	}
 
-	public GetModsRequest addMod(Collection<Integer> modId)
+	public GetModsRequest addMod(Collection<Long> modId)
 	{
 		modIds.addAll(modId);
 		return this;
 	}
 
-	public GetModsRequest addMod(Iterable<Integer> modId)
+	public GetModsRequest addMod(Iterable<Long> modId)
 	{
-		for(int i : modId)
+		for(long i : modId)
 			modIds.add(i);
 		return this;
 	}
 
-	public List<Integer> modIds()
+	public List<Long> modIds()
 	{
 		return Collections.unmodifiableList(modIds);
 	}

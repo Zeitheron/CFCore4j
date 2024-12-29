@@ -5,19 +5,19 @@ import org.json.JSONObject;
 public class FileIndex
 {
 	public final String gameVersion;
-	public final int fileId;
+	public final long fileId;
 	public final String filename;
 	public final FileReleaseType releaseType;
-	public final Nullable<Integer> gameVersionTypeId;
+	public final Nullable<Long> gameVersionTypeId;
 	public final Nullable<ModLoaderType> modLoader;
 
 	public FileIndex(JSONObject $)
 	{
 		this.gameVersion = $.getString("gameVersion");
-		this.fileId = $.getInt("fileId");
+		this.fileId = $.getLong("fileId");
 		this.filename = $.getString("filename");
 		this.releaseType = FileReleaseType.fromJson($.getInt("releaseType"));
-		this.gameVersionTypeId = new Nullable<>($.isNull("gameVersionTypeId") ? null : $.getInt("gameVersionTypeId"));
+		this.gameVersionTypeId = new Nullable<>($.isNull("gameVersionTypeId") ? null : $.getLong("gameVersionTypeId"));
 		this.modLoader = new Nullable<>($.isNull("modLoader") ? null : ModLoaderType.fromJson($.getInt("modLoader")));
 	}
 

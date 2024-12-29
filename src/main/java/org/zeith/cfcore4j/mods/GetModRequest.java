@@ -6,25 +6,25 @@ import org.zeith.cfcore4j.query.QueryBuilder;
 public class GetModRequest
 		implements IQueryContainer
 {
-	private int modId;
+	private long modId;
 
-	public GetModRequest(int modId)
+	public GetModRequest(long modId)
 	{
 		this.modId = modId;
 	}
 
-	public static GetModRequest create(int modId)
+	public static GetModRequest create(long modId)
 	{
 		return new GetModRequest(modId);
 	}
 
-	public GetModRequest modId(int modId)
+	public GetModRequest modId(long modId)
 	{
 		this.modId = modId;
 		return this;
 	}
 
-	public int modId()
+	public long modId()
 	{
 		return modId;
 	}

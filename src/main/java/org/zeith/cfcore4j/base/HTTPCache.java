@@ -3,8 +3,9 @@ package org.zeith.cfcore4j.base;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 
-import java.util.HashMap;
+import java.util.Comparator;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.TimeUnit;
 
 public interface HTTPCache
@@ -22,39 +23,71 @@ public interface HTTPCache
 	
 	void putCached(String url, String value);
 	
-	static HTTPCache cacheInRAMFor(TimeUnit unit, long duration)
+	static HTTPCacheInRAM cacheInRAMFor(TimeUnit unit, long duration)
 	{
 		return new HTTPCacheInRAM(unit.toMillis(duration));
 	}
 	
-	class HTTPCacheInRAM implements HTTPCache
+	class HTTPCacheInRAM
+			implements HTTPCache
 	{
 		private final long cacheLifespanMS;
-		private final Map<String, Long> cacheTime = new HashMap<>();
-		private final Map<String, String> cacheContent = new HashMap<>();
+		private final Map<String, CacheEntry> cacheContent = new ConcurrentHashMap<>();
+		private int cacheSizeLimit;
 		
 		public HTTPCacheInRAM(long cacheLifespanMS)
 		{
 			this.cacheLifespanMS = cacheLifespanMS;
 		}
 		
+		public HTTPCacheInRAM cacheSizeLimit(int cacheSizeLimit)
+		{
+			this.cacheSizeLimit = cacheSizeLimit;
+			return this;
+		}
+		
 		@Override
 		public boolean shouldRefresh(String url)
 		{
-			return !cacheTime.containsKey(url) || System.currentTimeMillis() - cacheTime.get(url) >= cacheLifespanMS;
+			return !cacheContent.containsKey(url) || System.currentTimeMillis() - cacheContent.get(url).time >= cacheLifespanMS;
 		}
 		
 		@Override
 		public String getCached(String url)
 		{
-			return cacheContent.get(url);
+			CacheEntry e = cacheContent.get(url);
+			return e != null ? e.value : null;
 		}
 		
 		@Override
 		public void putCached(String url, String value)
 		{
-			cacheTime.put(url, System.currentTimeMillis());
-			cacheContent.put(url, value);
+			cacheContent.put(url, new CacheEntry(
+							System.currentTimeMillis(),
+							value
+					)
+			);
+			
+			if(cacheSizeLimit > 0 && cacheContent.size() > cacheSizeLimit)
+			{
+				cacheContent.entrySet()
+						.stream()
+						.min(Comparator.comparingLong(e -> e.getValue().time))
+						.map(Map.Entry::getKey)
+						.ifPresent(cacheContent::remove);
+			}
+		}
+		
+		private static class CacheEntry
+		{
+			long time;
+			String value;
+			
+			public CacheEntry(long time, String value)
+			{
+				this.time = time;
+				this.value = value;
+			}
 		}
 	}
 }

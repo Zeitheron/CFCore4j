@@ -6,28 +6,28 @@ import org.zeith.cfcore4j.query.QueryBuilder;
 public class GetModFilesRequest
 		implements IQueryContainer
 {
-	private int modId;
-	private Integer gameVersionTypeId;
+	private long modId;
+	private Long gameVersionTypeId;
 	private Integer index;
 	private Integer pageSize;
 
-	public GetModFilesRequest(int modId)
+	public GetModFilesRequest(long modId)
 	{
 		this.modId = modId;
 	}
 
-	public static GetModFilesRequest create(int modId)
+	public static GetModFilesRequest create(long modId)
 	{
 		return new GetModFilesRequest(modId);
 	}
 
-	public GetModFilesRequest modId(int modId)
+	public GetModFilesRequest modId(long modId)
 	{
 		this.modId = modId;
 		return this;
 	}
 
-	public GetModFilesRequest gameVersionTypeId(Integer gameVersionTypeId)
+	public GetModFilesRequest gameVersionTypeId(Long gameVersionTypeId)
 	{
 		this.gameVersionTypeId = gameVersionTypeId;
 		return this;
@@ -45,7 +45,7 @@ public class GetModFilesRequest
 		return this;
 	}
 
-	public int modId()
+	public long modId()
 	{
 		return this.modId;
 	}

@@ -7,7 +7,7 @@ import java.time.Instant;
 
 public class Game
 {
-	public final int id;
+	public final long id;
 	public final String name;
 	public final String slug;
 	public final Instant dateModified;
@@ -17,7 +17,7 @@ public class Game
 
 	public Game(JSONObject $)
 	{
-		this.id = $.getInt("id");
+		this.id = $.getLong("id");
 		this.name = $.getString("name");
 		this.slug = $.getString("slug");
 		this.dateModified = Util.parseDateTime($.getString("dateModified"));

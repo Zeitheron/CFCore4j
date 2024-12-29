@@ -4,14 +4,14 @@ import org.json.JSONObject;
 
 public class FileDependency
 {
-	public final int modId;
-	public final int fileId;
+	public final long modId;
+	public final long fileId;
 	public final FileRelationType relationType;
 
 	public FileDependency(JSONObject $)
 	{
-		this.modId = $.getInt("modId");
-		this.fileId = $.optInt("fileId");
+		this.modId = $.getLong("modId");
+		this.fileId = $.optLong("fileId");
 		this.relationType = FileRelationType.fromJson($.getInt("relationType"));
 	}
 

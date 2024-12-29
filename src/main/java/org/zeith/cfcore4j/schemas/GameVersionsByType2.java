@@ -5,21 +5,21 @@ import org.zeith.cfcore4j.Util;
 
 import java.util.List;
 
-public class GameVersionsByType
+public class GameVersionsByType2
 {
 	public final long type;
-	public final List<String> versions;
+	public final List<GameVersion> versions;
 
-	public GameVersionsByType(JSONObject $)
+	public GameVersionsByType2(JSONObject $)
 	{
 		this.type = $.getLong("type");
-		this.versions = Util.parseListStr($.getJSONArray("versions"));
+		this.versions = Util.parseList($.getJSONArray("versions"), GameVersion::new);
 	}
 
 	@Override
 	public String toString()
 	{
-		return "GameVersionsByType{" +
+		return "GameVersionsByType2{" +
 				"type=" + type +
 				", versions=" + versions +
 				'}';

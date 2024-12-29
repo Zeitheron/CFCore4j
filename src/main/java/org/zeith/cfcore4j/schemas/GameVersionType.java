@@ -4,15 +4,15 @@ import org.json.JSONObject;
 
 public class GameVersionType
 {
-	public final int id;
-	public final int gameId;
+	public final long id;
+	public final long gameId;
 	public final String name;
 	public final String slug;
 
 	public GameVersionType(JSONObject $)
 	{
-		this.id = $.getInt("id");
-		this.gameId = $.getInt("gameId");
+		this.id = $.getLong("id");
+		this.gameId = $.getLong("gameId");
 		this.name = $.getString("name");
 		this.slug = $.getString("slug");
 	}

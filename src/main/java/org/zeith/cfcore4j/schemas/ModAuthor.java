@@ -4,13 +4,13 @@ import org.json.JSONObject;
 
 public class ModAuthor
 {
-	public final int id;
+	public final long id;
 	public final String name;
 	public final String url;
 
 	public ModAuthor(JSONObject $)
 	{
-		this.id = $.getInt("id");
+		this.id = $.getLong("id");
 		this.name = $.getString("name");
 		this.url = $.getString("url");
 	}

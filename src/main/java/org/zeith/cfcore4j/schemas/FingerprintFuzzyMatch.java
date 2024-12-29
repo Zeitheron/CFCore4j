@@ -7,14 +7,14 @@ import java.util.List;
 
 public class FingerprintFuzzyMatch
 {
-	public final int id;
+	public final long id;
 	public final File file;
 	public final List<File> latestFiles;
 	public final List<Long> fingerprints;
 
 	public FingerprintFuzzyMatch(JSONObject $)
 	{
-		this.id = $.getInt("id");
+		this.id = $.getLong("id");
 		this.file = new File($.getJSONObject("file"));
 		this.latestFiles = Util.parseList($.getJSONArray("latestFiles"), File::new);
 		this.fingerprints = Util.parseListLong($.getJSONArray("fingerprints"));

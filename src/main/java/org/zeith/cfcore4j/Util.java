@@ -5,7 +5,6 @@ import org.json.JSONObject;
 
 import java.time.DateTimeException;
 import java.time.Instant;
-import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.function.BiFunction;
 import java.util.function.Function;
@@ -18,7 +17,7 @@ public class Util
 		if(dateTime == null || dateTime.isEmpty()) return null;
 		try
 		{
-			return Instant.from(DateTimeFormatter.ISO_DATE_TIME.parse(dateTime));
+			return Instant.parse(dateTime);
 		} catch(DateTimeException e)
 		{
 			return null;

@@ -19,32 +19,36 @@ public class Files
 	/**
 	 * Get a single file of the specified mod.
 	 *
-	 * @param req GetModFileRequest
+	 * @param req
+	 * 		GetModFileRequest
+	 *
 	 * @return GetModFileResponse
+	 *
 	 * @see GetModFileRequest
 	 * @see GetModFileResponse
 	 */
 	public GetModFileResponse getModFile(GetModFileRequest req)
 	{
 		return new GetModFileResponse(
-				core.getCachedJSON("mods/" + req.modId() + "/files/" + req.fileId(), () ->
-						core.checkValid("Mod " + req.modId() + " File " + req.fileId(),
-								core.getAuth("mods/" + req.modId() + "/files/" + req.fileId())
-						)
-				)
+				core.request(1, "mods/" + req.modId() + "/files/" + req.fileId(), null, "Mod " + req.modId() + " File " + req.fileId())
+						.get()
 		);
 	}
 	
 	/**
 	 * Get a single file of the specified mod.
 	 *
-	 * @param modId  The mod to get file for.
-	 * @param fileId The file id to get.
+	 * @param modId
+	 * 		The mod to get file for.
+	 * @param fileId
+	 * 		The file id to get.
+	 *
 	 * @return An instance of a file
+	 *
 	 * @see GetModFileRequest
 	 * @see GetModFileResponse
 	 */
-	public File getModFile(int modId, int fileId)
+	public File getModFile(long modId, long fileId)
 	{
 		return getModFile(GetModFileRequest.create(modId, fileId)).data;
 	}
@@ -52,31 +56,34 @@ public class Files
 	/**
 	 * Get all files of the specified mod.
 	 *
-	 * @param req GetModFilesRequest
+	 * @param req
+	 * 		GetModFilesRequest
+	 *
 	 * @return GetModFilesResponse
+	 *
 	 * @see GetModFilesRequest
 	 * @see GetModFilesResponse
 	 */
 	public GetModFilesResponse getModFiles(GetModFilesRequest req)
 	{
 		return new GetModFilesResponse(this, req,
-				core.getCachedJSON("mods/" + req.modId() + "/files", req, () ->
-						core.checkValid("Mod " + req.modId() + " Files",
-								core.getAuth("mods/" + req.modId() + "/files", req)
-						)
-				)
+				core.request(1, "mods/" + req.modId() + "/files", req, "Mod " + req.modId() + " Files")
+						.get()
 		);
 	}
 	
 	/**
 	 * Get all files of the specified mod.
 	 *
-	 * @param modId The mod id.
+	 * @param modId
+	 * 		The mod id.
+	 *
 	 * @return GetModFilesResponse
+	 *
 	 * @see GetModFilesRequest
 	 * @see GetModFilesResponse
 	 */
-	public GetModFilesResponse getModFiles(int modId)
+	public GetModFilesResponse getModFiles(long modId)
 	{
 		return getModFiles(GetModFilesRequest.create(modId));
 	}
@@ -84,33 +91,34 @@ public class Files
 	/**
 	 * Get a list of files.
 	 *
-	 * @param req GetFilesRequest
+	 * @param req
+	 * 		GetFilesRequest
+	 *
 	 * @return GetFilesResponse
+	 *
 	 * @see GetFilesRequest
 	 * @see GetFilesResponse
 	 */
 	public GetFilesResponse getFiles(GetFilesRequest req)
 	{
 		return new GetFilesResponse(
-				core.getCachedJSON("mods/files\n" + req.toString(), () ->
-						core.checkValid("Files " + req.fileIds(),
-								core.postAuth("mods/files")
-										.contentType(HttpRequest.CONTENT_TYPE_JSON)
-										.send(req.toString())
-						)
-				)
+				core.request(1, "mods/files", null, "Files " + req.fileIds(), req.toString())
+						.post()
 		);
 	}
 	
 	/**
 	 * Get a list of files.
 	 *
-	 * @param fileIds List of fileId to get files for.
+	 * @param fileIds
+	 * 		List of fileId to get files for.
+	 *
 	 * @return A List of {@link File}
+	 *
 	 * @see GetFilesRequest
 	 * @see GetFilesResponse
 	 */
-	public List<File> getFiles(int... fileIds)
+	public List<File> getFiles(long... fileIds)
 	{
 		return getFiles(GetFilesRequest.create().addFile(fileIds)).data;
 	}
@@ -118,12 +126,15 @@ public class Files
 	/**
 	 * Get a list of files.
 	 *
-	 * @param fileIds List of fileId to get files for.
+	 * @param fileIds
+	 * 		List of fileId to get files for.
+	 *
 	 * @return A List of {@link File}
+	 *
 	 * @see GetFilesRequest
 	 * @see GetFilesResponse
 	 */
-	public List<File> getFiles(Iterable<Integer> fileIds)
+	public List<File> getFiles(Iterable<Long> fileIds)
 	{
 		return getFiles(GetFilesRequest.create().addFile(fileIds)).data;
 	}
@@ -131,12 +142,15 @@ public class Files
 	/**
 	 * Get a list of files.
 	 *
-	 * @param fileIds List of fileId to get files for.
+	 * @param fileIds
+	 * 		List of fileId to get files for.
+	 *
 	 * @return A List of {@link File}
+	 *
 	 * @see GetFilesRequest
 	 * @see GetFilesResponse
 	 */
-	public List<File> getFiles(Collection<Integer> fileIds)
+	public List<File> getFiles(Collection<Long> fileIds)
 	{
 		return getFiles(GetFilesRequest.create().addFile(fileIds)).data;
 	}
@@ -144,31 +158,35 @@ public class Files
 	/**
 	 * Get the changelog of a file in HTML format.
 	 *
-	 * @param req GetModFileChangelogRequest
+	 * @param req
+	 * 		GetModFileChangelogRequest
+	 *
 	 * @return GetModFileChangelogResponse
+	 *
 	 * @see GetModFileChangelogRequest
 	 * @see GetModFileChangelogResponse
 	 */
 	public GetModFileChangelogResponse getModFileChangelog(GetModFileChangelogRequest req)
 	{
 		return new GetModFileChangelogResponse(
-				core.getCachedJSON("mods/" + req.modId() + "/files/" + req.fileId() + "/changelog", () ->
-						core.checkValid("Mod " + req.modId() + " File " + req.fileId() + " Changelog",
-								core.getAuth("mods/" + req.modId() + "/files/" + req.fileId() + "/changelog")
-						)
-				)
+				core.request(1, "mods/" + req.modId() + "/files/" + req.fileId() + "/changelog", null, "Mod " + req.modId() + " File " + req.fileId() + " Changelog")
+						.get()
 		);
 	}
 	
 	/**
 	 * Get the changelog of a file in HTML format.
 	 *
-	 * @param modId  The mod of the file to get changelog for.
-	 * @param fileId The file to get the changelog for.
+	 * @param modId
+	 * 		The mod of the file to get changelog for.
+	 * @param fileId
+	 * 		The file to get the changelog for.
+	 *
 	 * @return HTML formatted string with a complete changelog for a file.
+	 *
 	 * @see GetModFileChangelogResponse
 	 */
-	public String getModFileChangelog(int modId, int fileId)
+	public String getModFileChangelog(long modId, long fileId)
 	{
 		return getModFileChangelog(GetModFileChangelogRequest.create(modId, fileId)).data;
 	}
@@ -180,19 +198,19 @@ public class Files
 	 * Timtower said "Would get a result for that when you try it", but if any issues arise, please report, and we'll add a proper handling behavior for those cases!!
 	 * <a href="https://discord.com/channels/428228256236306434/909494727341121607/915679409313300550">https://discord.com/channels/428228256236306434/909494727341121607/915679409313300550</a>
 	 *
-	 * @param req GetModFileDownloadURLRequest
+	 * @param req
+	 * 		GetModFileDownloadURLRequest
+	 *
 	 * @return GetModFileDownloadURLResponse
+	 *
 	 * @see GetModFileDownloadURLRequest
 	 * @see GetModFileDownloadURLResponse
 	 */
 	public GetModFileDownloadURLResponse getModFileDownloadURL(GetModFileDownloadURLRequest req)
 	{
 		return new GetModFileDownloadURLResponse(
-				core.getCachedJSON("mods/" + req.modId() + "/files/" + req.fileId() + "/download-url", () ->
-						core.checkValid("Mod " + req.modId() + " File " + req.fileId() + " Download URL",
-								core.getAuth("mods/" + req.modId() + "/files/" + req.fileId() + "/download-url")
-						)
-				)
+				core.request(1, "mods/" + req.modId() + "/files/" + req.fileId() + "/download-url", null, "Mod " + req.modId() + " File " + req.fileId() + " Download URL")
+						.get()
 		);
 	}
 	
@@ -201,14 +219,17 @@ public class Files
 	 * <p>
 	 * Untested. There is a toggle "Allow the distribution of this project outside the CurseForge-Overwolf ecosystem.".
 	 * Timtower said "Would get a result for that when you try it", but if any issues arise, please report, and we'll add a proper handling behavior for those cases!!
-	 * <a href="https://discord.com/channels/428228256236306434/909494727341121607/915679409313300550">https://discord.com/channels/428228256236306434/909494727341121607/915679409313300550</a>
 	 *
-	 * @param modId  The mod of the file to get URL for.
-	 * @param fileId The file to get the URL for.
+	 * @param modId
+	 * 		The mod of the file to get URL for.
+	 * @param fileId
+	 * 		The file to get the URL for.
+	 *
 	 * @return URL for downloading the mod.
+	 *
 	 * @see GetModFileDownloadURLRequest
 	 */
-	public String getModFileDownloadURL(int modId, int fileId)
+	public String getModFileDownloadURL(long modId, long fileId)
 	{
 		return getModFileDownloadURL(GetModFileDownloadURLRequest.create(modId, fileId)).data;
 	}

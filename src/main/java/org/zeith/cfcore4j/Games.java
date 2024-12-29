@@ -1,9 +1,7 @@
 package org.zeith.cfcore4j;
 
 import org.zeith.cfcore4j.games.*;
-import org.zeith.cfcore4j.schemas.Game;
-import org.zeith.cfcore4j.schemas.GameVersionType;
-import org.zeith.cfcore4j.schemas.GameVersionsByType;
+import org.zeith.cfcore4j.schemas.*;
 
 import java.util.List;
 
@@ -19,49 +17,52 @@ public class Games
 	/**
 	 * Get all games that are available to the provided API key.
 	 *
-	 * @param req GetGamesRequest
+	 * @param req
+	 * 		GetGamesRequest
+	 *
 	 * @return GetGamesResponse
+	 *
 	 * @see GetGamesRequest
 	 * @see GetGamesResponse
 	 */
 	public GetGamesResponse getGames(GetGamesRequest req)
 	{
 		return new GetGamesResponse(this, req,
-				core.getCachedJSON("games", req, () ->
-						core.checkValid("Game List",
-								core.getAuth("games", req)
-						)
-				)
+				core.request(1, "games", null, "Game List")
+						.get()
 		);
 	}
 	
 	/**
 	 * Get a single game. A private game is only accessible by its respective API key.
 	 *
-	 * @param req GetGameRequest
+	 * @param req
+	 * 		GetGameRequest
+	 *
 	 * @return GetGameResponse
+	 *
 	 * @see GetGameRequest
 	 * @see GetGameResponse
 	 */
 	public GetGameResponse getGame(GetGameRequest req)
 	{
 		return new GetGameResponse(
-				core.getCachedJSON("games/" + req.gameId(), () ->
-						core.checkValid("Game " + req.gameId(),
-								core.getAuth("games/" + req.gameId())
-						)
-				)
+				core.request(1, "games/" + req.gameId(), null, "Game " + req.gameId())
+						.get()
 		);
 	}
 	
 	/**
 	 * Get a single game. A private game is only accessible by its respective API key.
 	 *
-	 * @param gameId The game to get.
+	 * @param gameId
+	 * 		The game to get.
+	 *
 	 * @return The {@link Game}
+	 *
 	 * @see Game
 	 */
-	public Game getGame(int gameId)
+	public Game getGame(long gameId)
 	{
 		return getGame(GetGameRequest.create(gameId)).game;
 	}
@@ -69,32 +70,69 @@ public class Games
 	/**
 	 * Get all available versions for each known version type of the specified game. A private game is only accessible to its respective API key.
 	 *
-	 * @param req GetVersionsRequest
+	 * @param req
+	 * 		GetVersionsRequest
+	 *
 	 * @return GetVersionsResponse
+	 *
 	 * @see GetVersionsRequest
 	 * @see GetVersionsResponse
 	 */
 	public GetVersionsResponse getVersions(GetVersionsRequest req)
 	{
 		return new GetVersionsResponse(
-				core.getCachedJSON("games/" + req.gameId() + "/versions", () ->
-						core.checkValid("Game " + req.gameId() + " versions",
-								core.getAuth("games/" + req.gameId() + "/versions")
-						)
-				)
+				core.request(1, "games/" + req.gameId() + "/versions", null, "Game " + req.gameId() + " versions")
+						.get()
 		);
 	}
 	
 	/**
 	 * Get all available versions for each known version type of the specified game. A private game is only accessible to its respective API key.
 	 *
-	 * @param gameId The game to get versions for.
+	 * @param req
+	 * 		GetVersionsRequest
+	 *
+	 * @return GetVersionsResponse
+	 *
+	 * @see GetVersionsRequest
+	 * @see GetVersionsResponse
+	 */
+	public GetVersionsResponseV2 getVersionsV2(GetVersionsRequest req)
+	{
+		return new GetVersionsResponseV2(
+				core.request(2, "games/" + req.gameId() + "/versions", null, "Game " + req.gameId() + " versions V2")
+						.get()
+		);
+	}
+	
+	/**
+	 * Get all available versions for each known version type of the specified game. A private game is only accessible to its respective API key.
+	 *
+	 * @param gameId
+	 * 		The game to get versions for.
+	 *
 	 * @return List of {@link GameVersionsByType}
+	 *
 	 * @see GameVersionsByType
 	 */
-	public List<GameVersionsByType> getVersions(int gameId)
+	public List<GameVersionsByType> getVersions(long gameId)
 	{
 		return getVersions(GetVersionsRequest.create(gameId)).data;
+	}
+	
+	/**
+	 * Get all available versions for each known version type of the specified game. A private game is only accessible to its respective API key.
+	 *
+	 * @param gameId
+	 * 		The game to get versions for.
+	 *
+	 * @return List of {@link GameVersionsByType}
+	 *
+	 * @see GameVersionsByType
+	 */
+	public List<GameVersionsByType2> getVersionsV2(long gameId)
+	{
+		return getVersionsV2(GetVersionsRequest.create(gameId)).data;
 	}
 	
 	/**
@@ -104,19 +142,19 @@ public class Games
 	 * <p>
 	 * Currently, when creating games via the CurseForge Core Console, you are limited to a single game version type. This means that this endpoint is probably not useful in most cases and is relevant mostly when handling existing games that have multiple game versions such as World of Warcraft and Minecraft (e.g. 517 for wow_retail, 432 for minecraft).
 	 *
-	 * @param req GetVersionTypesRequest
+	 * @param req
+	 * 		GetVersionTypesRequest
+	 *
 	 * @return GetVersionTypesResponse
+	 *
 	 * @see GetVersionTypesRequest
 	 * @see GetVersionTypesResponse
 	 */
 	public GetVersionTypesResponse getVersionTypes(GetVersionTypesRequest req)
 	{
 		return new GetVersionTypesResponse(
-				core.getCachedJSON("games/" + req.gameId() + "/version-types", () ->
-						core.checkValid("Game " + req.gameId() + " version types",
-								core.getAuth("games/" + req.gameId() + "/version-types")
-						)
-				)
+				core.request(1, "games/" + req.gameId() + "/version-types", null, "Game " + req.gameId() + " version types")
+						.get()
 		);
 	}
 	
@@ -127,11 +165,14 @@ public class Games
 	 * <p>
 	 * Currently, when creating games via the CurseForge Core Console, you are limited to a single game version type. This means that this endpoint is probably not useful in most cases and is relevant mostly when handling existing games that have multiple game versions such as World of Warcraft and Minecraft (e.g. 517 for wow_retail, 432 for minecraft).
 	 *
-	 * @param gameId The game to get version types for.
+	 * @param gameId
+	 * 		The game to get version types for.
+	 *
 	 * @return A list of {@link GameVersionType}
+	 *
 	 * @see GameVersionType
 	 */
-	public List<GameVersionType> getVersionTypes(int gameId)
+	public List<GameVersionType> getVersionTypes(long gameId)
 	{
 		return getVersionTypes(GetVersionTypesRequest.create(gameId)).data;
 	}

@@ -8,19 +8,25 @@ import java.util.stream.Collectors;
 
 public class GetFingerprintsFuzzyMatchesRequest
 {
-	private int gameId;
+	private long gameId;
 	private final List<FolderFingerprint> fingerprints = new ArrayList<>();
 
-	public GetFingerprintsFuzzyMatchesRequest(int gameId)
+	public GetFingerprintsFuzzyMatchesRequest(long gameId)
 	{
 		this.gameId = gameId;
 	}
 
-	public static GetFingerprintsFuzzyMatchesRequest create(int gameId)
+	public static GetFingerprintsFuzzyMatchesRequest create(long gameId)
 	{
 		return new GetFingerprintsFuzzyMatchesRequest(gameId);
 	}
-
+	
+	public GetFingerprintsFuzzyMatchesRequest gameId(long gameId)
+	{
+		this.gameId = gameId;
+		return this;
+	}
+	
 	public GetFingerprintsFuzzyMatchesRequest addFingerprint(FolderFingerprint... fingerprint)
 	{
 		this.fingerprints.addAll(Arrays.asList(fingerprint));

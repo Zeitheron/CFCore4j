@@ -4,8 +4,8 @@ import org.json.JSONObject;
 
 public class ModAsset
 {
-	public final int id;
-	public final int modId;
+	public final long id;
+	public final long modId;
 	public final String title;
 	public final String description;
 	public final String thumbnailUrl;
@@ -13,8 +13,8 @@ public class ModAsset
 
 	public ModAsset(JSONObject $)
 	{
-		this.id = $.getInt("id");
-		this.modId = $.getInt("modId");
+		this.id = $.getLong("id");
+		this.modId = $.getLong("modId");
 		this.title = $.optString("title");
 		this.description = $.optString("description");
 		this.thumbnailUrl = $.optString("thumbnailUrl");

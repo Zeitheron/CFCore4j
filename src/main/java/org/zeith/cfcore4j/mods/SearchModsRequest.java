@@ -4,20 +4,20 @@ import org.zeith.cfcore4j.query.IQueryContainer;
 import org.zeith.cfcore4j.query.QueryBuilder;
 import org.zeith.cfcore4j.schemas.ModLoaderType;
 import org.zeith.cfcore4j.schemas.ModsSearchSortField;
-import org.zeith.cfcore4j.schemas.ModsSearchSortOrder;
+import org.zeith.cfcore4j.schemas.SortOrder;
 
 public class SearchModsRequest
 		implements IQueryContainer
 {
-	private Integer gameId;
-	private Integer classId;
-	private Integer categoryId;
+	private Long gameId;
+	private Long classId;
+	private Long categoryId;
 	private String gameVersion;
 	private String searchFilter;
 	private ModsSearchSortField sortField;
-	private ModsSearchSortOrder sortOrder;
+	private SortOrder sortOrder;
 	private ModLoaderType modLoaderType;
-	private Integer gameVersionTypeId;
+	private Long gameVersionTypeId;
 	private Integer index;
 	private Integer pageSize;
 
@@ -26,19 +26,19 @@ public class SearchModsRequest
 		return new SearchModsRequest();
 	}
 
-	public SearchModsRequest gameId(Integer gameId)
+	public SearchModsRequest gameId(Long gameId)
 	{
 		this.gameId = gameId;
 		return this;
 	}
 
-	public SearchModsRequest classId(Integer classId)
+	public SearchModsRequest classId(Long classId)
 	{
 		this.classId = classId;
 		return this;
 	}
 
-	public SearchModsRequest categoryId(Integer categoryId)
+	public SearchModsRequest categoryId(Long categoryId)
 	{
 		this.classId = categoryId;
 		return this;
@@ -62,7 +62,7 @@ public class SearchModsRequest
 		return this;
 	}
 
-	public SearchModsRequest sortOrder(ModsSearchSortOrder sortOrder)
+	public SearchModsRequest sortOrder(SortOrder sortOrder)
 	{
 		this.sortOrder = sortOrder;
 		return this;
@@ -74,7 +74,7 @@ public class SearchModsRequest
 		return this;
 	}
 
-	public SearchModsRequest gameVersionTypeId(Integer gameVersionTypeId)
+	public SearchModsRequest gameVersionTypeId(Long gameVersionTypeId)
 	{
 		this.gameVersionTypeId = gameVersionTypeId;
 		return this;

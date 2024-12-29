@@ -6,38 +6,38 @@ import org.zeith.cfcore4j.query.QueryBuilder;
 public class GetModFileDownloadURLRequest
 		implements IQueryContainer
 {
-	private int modId;
-	private int fileId;
+	private long modId;
+	private long fileId;
 
-	public GetModFileDownloadURLRequest(int modId, int fileId)
+	public GetModFileDownloadURLRequest(long modId, long fileId)
 	{
 		this.modId = modId;
 		this.fileId = fileId;
 	}
 
-	public static GetModFileDownloadURLRequest create(int modId, int fileId)
+	public static GetModFileDownloadURLRequest create(long modId, long fileId)
 	{
 		return new GetModFileDownloadURLRequest(modId, fileId);
 	}
 
-	public GetModFileDownloadURLRequest modId(int modId)
+	public GetModFileDownloadURLRequest modId(long modId)
 	{
 		this.modId = modId;
 		return this;
 	}
 
-	public GetModFileDownloadURLRequest fileId(int fileId)
+	public GetModFileDownloadURLRequest fileId(long fileId)
 	{
 		this.fileId = fileId;
 		return this;
 	}
 
-	public int modId()
+	public long modId()
 	{
 		return modId;
 	}
 
-	public int fileId()
+	public long fileId()
 	{
 		return fileId;
 	}

@@ -6,25 +6,25 @@ import org.zeith.cfcore4j.query.QueryBuilder;
 public class GetVersionsRequest
 		implements IQueryContainer
 {
-	private int gameId;
+	private long gameId;
 
-	public GetVersionsRequest(int gameId)
+	public GetVersionsRequest(long gameId)
 	{
 		this.gameId = gameId;
 	}
 
-	public static GetVersionsRequest create(int gameId)
+	public static GetVersionsRequest create(long gameId)
 	{
 		return new GetVersionsRequest(gameId);
 	}
 
-	public GetVersionsRequest gameId(int gameId)
+	public GetVersionsRequest gameId(long gameId)
 	{
 		this.gameId = gameId;
 		return this;
 	}
 
-	public int gameId()
+	public long gameId()
 	{
 		return gameId;
 	}

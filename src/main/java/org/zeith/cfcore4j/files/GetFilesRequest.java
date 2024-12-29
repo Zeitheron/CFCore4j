@@ -9,34 +9,34 @@ import java.util.List;
 
 public class GetFilesRequest
 {
-	private final List<Integer> fileIds = new ArrayList<>();
+	private final List<Long> fileIds = new ArrayList<>();
 
 	public static GetFilesRequest create()
 	{
 		return new GetFilesRequest();
 	}
 
-	public GetFilesRequest addFile(int... fileId)
+	public GetFilesRequest addFile(long... fileId)
 	{
-		for(int i : fileId)
+		for(long i : fileId)
 			this.fileIds.add(i);
 		return this;
 	}
 
-	public GetFilesRequest addFile(Collection<Integer> fileId)
+	public GetFilesRequest addFile(Collection<Long> fileId)
 	{
 		this.fileIds.addAll(fileId);
 		return this;
 	}
 
-	public GetFilesRequest addFile(Iterable<Integer> fileId)
+	public GetFilesRequest addFile(Iterable<Long> fileId)
 	{
-		for(int i : fileId)
+		for(long i : fileId)
 			this.fileIds.add(i);
 		return this;
 	}
 
-	public List<Integer> fileIds()
+	public List<Long> fileIds()
 	{
 		return Collections.unmodifiableList(fileIds);
 	}

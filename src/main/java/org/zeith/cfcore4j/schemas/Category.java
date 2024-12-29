@@ -7,29 +7,29 @@ import java.time.Instant;
 
 public class Category
 {
-	public final int id;
-	public final int gameId;
+	public final long id;
+	public final long gameId;
 	public final String name;
 	public final String slug;
 	public final String url;
 	public final String iconUrl;
 	public final Instant dateModified;
 	public final Nullable<Boolean> isClass;
-	public final Nullable<Integer> classId;
-	public final Nullable<Integer> parentCategoryId;
+	public final Nullable<Long> classId;
+	public final Nullable<Long> parentCategoryId;
 
 	public Category(JSONObject $)
 	{
-		this.id = $.getInt("id");
-		this.gameId = $.getInt("gameId");
+		this.id = $.getLong("id");
+		this.gameId = $.getLong("gameId");
 		this.name = $.getString("name");
 		this.slug = $.optString("slug");
 		this.url = $.optString("url");
 		this.iconUrl = $.getString("iconUrl");
 		this.dateModified = Util.parseDateTime($.optString("dateModified"));
 		this.isClass = new Nullable<>($.isNull("isClass") ? null : $.optBoolean("isClass"));
-		this.classId = new Nullable<>($.isNull("classId") ? null : $.optInt("classId"));
-		this.parentCategoryId = new Nullable<>($.isNull("parentCategoryId") ? null : $.optInt("parentCategoryId"));
+		this.classId = new Nullable<>($.isNull("classId") ? null : $.optLong("classId"));
+		this.parentCategoryId = new Nullable<>($.isNull("parentCategoryId") ? null : $.optLong("parentCategoryId"));
 	}
 
 	@Override

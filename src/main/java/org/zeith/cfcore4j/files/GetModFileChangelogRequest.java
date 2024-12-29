@@ -6,38 +6,38 @@ import org.zeith.cfcore4j.query.QueryBuilder;
 public class GetModFileChangelogRequest
 		implements IQueryContainer
 {
-	private int modId;
-	private int fileId;
+	private long modId;
+	private long fileId;
 
-	public GetModFileChangelogRequest(int modId, int fileId)
+	public GetModFileChangelogRequest(long modId, long fileId)
 	{
 		this.modId = modId;
 		this.fileId = fileId;
 	}
 
-	public static GetModFileChangelogRequest create(int modId, int fileId)
+	public static GetModFileChangelogRequest create(long modId, long fileId)
 	{
 		return new GetModFileChangelogRequest(modId, fileId);
 	}
 
-	public GetModFileChangelogRequest modId(int modId)
+	public GetModFileChangelogRequest modId(long modId)
 	{
 		this.modId = modId;
 		return this;
 	}
 
-	public GetModFileChangelogRequest fileId(int fileId)
+	public GetModFileChangelogRequest fileId(long fileId)
 	{
 		this.fileId = fileId;
 		return this;
 	}
 
-	public int modId()
+	public long modId()
 	{
 		return modId;
 	}
 
-	public int fileId()
+	public long fileId()
 	{
 		return fileId;
 	}

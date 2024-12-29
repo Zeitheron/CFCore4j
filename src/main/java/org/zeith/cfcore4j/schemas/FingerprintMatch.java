@@ -7,13 +7,13 @@ import java.util.List;
 
 public class FingerprintMatch
 {
-	public final int id;
+	public final long id;
 	public final File file;
 	public final List<File> latestFiles;
 
 	public FingerprintMatch(JSONObject $)
 	{
-		this.id = $.getInt("id");
+		this.id = $.getLong("id");
 		this.file = new File($.getJSONObject("file"));
 		this.latestFiles = Util.parseList($.getJSONArray("latestFiles"), File::new);
 	}
