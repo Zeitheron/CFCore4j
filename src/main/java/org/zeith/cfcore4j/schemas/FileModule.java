@@ -9,7 +9,9 @@ public class FileModule
 
 	public FileModule(JSONObject $)
 	{
-		this.name = $.getString("name");
+		// Can be null... Which is undocumented.
+		this.name = $.isNull("name") ? null : $.getString("name");
+		
 		this.fingerprint = $.getLong("fingerprint");
 	}
 
