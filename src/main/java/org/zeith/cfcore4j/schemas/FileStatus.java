@@ -21,6 +21,10 @@ public enum FileStatus
 	UNDOCUMENTED_17, // 17
 	UNDOCUMENTED_18, // 18
 	UNDOCUMENTED_19, // 19
+	UNDOCUMENTED_20, // 20
+	UNDOCUMENTED_21, // 21
+	UNDOCUMENTED_22, // 22
+	UNDOCUMENTED_23, // 23
 	UNKNOWN;
 
 	private static final FileStatus[] VALUES = values();
