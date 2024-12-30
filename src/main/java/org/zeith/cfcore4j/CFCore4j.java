@@ -83,6 +83,7 @@ public class CFCore4j
 	
 	VersionedRequest request(int version, String url, IQueryContainer query, String requestName, String body)
 	{
+		if(query != null) query.validate();
 		return new VersionedRequest(
 				apiKey, cache, rateLimiter, requestTransformator,
 				requestName, version, url + (query != null ? query.toBuilder() : ""), body

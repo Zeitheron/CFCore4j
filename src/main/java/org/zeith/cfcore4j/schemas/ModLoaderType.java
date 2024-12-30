@@ -2,17 +2,24 @@ package org.zeith.cfcore4j.schemas;
 
 public enum ModLoaderType
 {
-	ANY, // 0
-	FORGE, // 1
-	CAULDRON, // 2
-	LITE_LOADER, // 3
-	FABRIC, // 4
-	QUILT, // 5
-	NEOFORGE, // 6
-	UNKNOWN; // 7
+	ANY("Any"), // 0
+	FORGE("Forge"), // 1
+	CAULDRON("Cauldron"), // 2
+	LITE_LOADER("LiteLoader"), // 3
+	FABRIC("Fabric"), // 4
+	QUILT("Quilt"), // 5
+	NEOFORGE("NeoForge"), // 6
+	UNKNOWN(null); // 7
 
 	private static final ModLoaderType[] VALUES = values();
-
+	
+	public final String jsonName;
+	
+	ModLoaderType(String jsonName)
+	{
+		this.jsonName = jsonName;
+	}
+	
 	public int toJson()
 	{
 		if(this == UNKNOWN) return 0;

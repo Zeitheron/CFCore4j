@@ -56,7 +56,10 @@ public class TestCFCore4j
 		System.out.println("Mods by Zeith:");
 		AtomicInteger count = new AtomicInteger();
 		AtomicLong downloads = new AtomicLong();
-		api.mods().searchMods(SearchModsRequest.create().gameId(minecraft.id).authorId(19207515L)).streamTillEnd().forEach(m ->
+		api.mods().searchMods(SearchModsRequest.create().gameId(minecraft.id).authorId(19207515L)
+				.gameVersions("1.20.4", "1.20.1")
+				.modLoaderTypes(ModLoaderType.FABRIC, ModLoaderType.NEOFORGE)
+		).streamTillEnd().forEach(m ->
 		{
 			System.out.println(m.name + ": " + m);
 			count.incrementAndGet();
