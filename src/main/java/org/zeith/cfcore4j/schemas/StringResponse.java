@@ -1,12 +1,12 @@
-package org.zeith.cfcore4j.files;
+package org.zeith.cfcore4j.schemas;
 
 import org.json.JSONObject;
 
-public class GetModFileDownloadURLResponse
+public class StringResponse
 {
 	public final String data;
 
-	public GetModFileDownloadURLResponse(JSONObject $)
+	public StringResponse(JSONObject $)
 	{
 		this.data = $.getString("data");
 	}
@@ -14,7 +14,7 @@ public class GetModFileDownloadURLResponse
 	@Override
 	public String toString()
 	{
-		return "GetModFileDownloadURLResponse{" +
+		return "StringResponse{" +
 				"data='" + data + '\'' +
 				'}';
 	}

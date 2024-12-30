@@ -2,7 +2,7 @@ package org.zeith.cfcore4j;
 
 import org.zeith.cfcore4j.files.*;
 import org.zeith.cfcore4j.schemas.File;
-import org.zeith.httplib.HttpRequest;
+import org.zeith.cfcore4j.schemas.StringResponse;
 
 import java.util.Collection;
 import java.util.List;
@@ -164,11 +164,11 @@ public class Files
 	 * @return GetModFileChangelogResponse
 	 *
 	 * @see GetModFileChangelogRequest
-	 * @see GetModFileChangelogResponse
+	 * @see StringResponse
 	 */
-	public GetModFileChangelogResponse getModFileChangelog(GetModFileChangelogRequest req)
+	public StringResponse getModFileChangelog(GetModFileChangelogRequest req)
 	{
-		return new GetModFileChangelogResponse(
+		return new StringResponse(
 				core.request(1, "mods/" + req.modId() + "/files/" + req.fileId() + "/changelog", null, "Mod " + req.modId() + " File " + req.fileId() + " Changelog")
 						.get()
 		);
@@ -184,7 +184,7 @@ public class Files
 	 *
 	 * @return HTML formatted string with a complete changelog for a file.
 	 *
-	 * @see GetModFileChangelogResponse
+	 * @see StringResponse
 	 */
 	public String getModFileChangelog(long modId, long fileId)
 	{
@@ -204,11 +204,11 @@ public class Files
 	 * @return GetModFileDownloadURLResponse
 	 *
 	 * @see GetModFileDownloadURLRequest
-	 * @see GetModFileDownloadURLResponse
+	 * @see StringResponse
 	 */
-	public GetModFileDownloadURLResponse getModFileDownloadURL(GetModFileDownloadURLRequest req)
+	public StringResponse getModFileDownloadURL(GetModFileDownloadURLRequest req)
 	{
-		return new GetModFileDownloadURLResponse(
+		return new StringResponse(
 				core.request(1, "mods/" + req.modId() + "/files/" + req.fileId() + "/download-url", null, "Mod " + req.modId() + " File " + req.fileId() + " Download URL")
 						.get()
 		);

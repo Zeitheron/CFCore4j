@@ -2,16 +2,19 @@ import org.zeith.cfcore4j.CFCore4j;
 import org.zeith.cfcore4j.CFCoreBuilder;
 import org.zeith.cfcore4j.base.HTTPCache;
 import org.zeith.cfcore4j.guava.RateLimiter;
+import org.zeith.cfcore4j.mods.SearchModsRequest;
 import org.zeith.cfcore4j.schemas.*;
 
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicLong;
 import java.util.stream.Collectors;
 
 public class TestCFCore4j
 {
 	public static void main(String[] args)
 	{
-		String apiKey = "your API key";
+		String apiKey = System.getenv("CFCORE_TOKEN");
 		
 		CFCore4j api = new CFCoreBuilder()
 				.authorize(apiKey) // Authorize our API with a key
@@ -49,5 +52,16 @@ public class TestCFCore4j
 		long fileId = 3541718;
 		File file = api.files().getFiles(fileId).get(0);
 		System.out.println(file.displayName + " {" + file.fileName + "}");
+		
+		System.out.println("Mods by Zeith:");
+		AtomicInteger count = new AtomicInteger();
+		AtomicLong downloads = new AtomicLong();
+		api.mods().searchMods(SearchModsRequest.create().gameId(minecraft.id).authorId(19207515L)).streamTillEnd().forEach(m ->
+		{
+			System.out.println(m.name + ": " + m);
+			count.incrementAndGet();
+			downloads.addAndGet(m.downloadCount);
+		});
+		System.out.println("Total of " + count + " with " + downloads + " total downloads.");
 	}
 }

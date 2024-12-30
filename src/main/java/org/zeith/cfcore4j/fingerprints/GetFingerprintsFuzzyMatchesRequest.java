@@ -60,4 +60,9 @@ public class GetFingerprintsFuzzyMatchesRequest
 		System.out.println($.toString(4));
 		return $.toString();
 	}
+	
+	public long gameId()
+	{
+		return gameId;
+	}
 }

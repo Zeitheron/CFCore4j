@@ -16,8 +16,8 @@ public class FingerprintFuzzyMatch
 	{
 		this.id = $.getLong("id");
 		this.file = new File($.getJSONObject("file"));
-		this.latestFiles = Util.parseList($.getJSONArray("latestFiles"), File::new);
-		this.fingerprints = Util.parseListLong($.getJSONArray("fingerprints"));
+		this.latestFiles = Util.parseList($.optJSONArray("latestFiles"), File::new);
+		this.fingerprints = Util.parseListLong($.optJSONArray("fingerprints"));
 	}
 
 	@Override

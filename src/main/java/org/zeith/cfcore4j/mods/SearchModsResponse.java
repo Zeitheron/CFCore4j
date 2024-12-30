@@ -29,7 +29,7 @@ public class SearchModsResponse
 	}
 
 	@Override
-	public SearchModsResponse fromIndex(int index)
+	public SearchModsResponse fromIndex(long index)
 	{
 		return mods.searchMods(req.clone().index(index));
 	}

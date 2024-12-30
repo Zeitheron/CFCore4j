@@ -17,6 +17,7 @@ public class Category
 	public final Nullable<Boolean> isClass;
 	public final Nullable<Long> classId;
 	public final Nullable<Long> parentCategoryId;
+	public final Nullable<Long> displayIndex;
 
 	public Category(JSONObject $)
 	{
@@ -30,22 +31,24 @@ public class Category
 		this.isClass = new Nullable<>($.isNull("isClass") ? null : $.optBoolean("isClass"));
 		this.classId = new Nullable<>($.isNull("classId") ? null : $.optLong("classId"));
 		this.parentCategoryId = new Nullable<>($.isNull("parentCategoryId") ? null : $.optLong("parentCategoryId"));
+		this.displayIndex = new Nullable<>($.isNull("displayIndex") ? null : $.optLong("displayIndex"));
 	}
-
+	
 	@Override
 	public String toString()
 	{
 		return "Category{" +
-				"id=" + id +
-				", gameId=" + gameId +
-				", name='" + name + '\'' +
-				", slug='" + slug + '\'' +
-				", url='" + url + '\'' +
-				", iconUrl='" + iconUrl + '\'' +
-				", dateModified=" + dateModified +
-				", isClass=" + isClass +
-				", classId=" + classId +
-				", parentCategoryId=" + parentCategoryId +
-				'}';
+			   "id=" + id +
+			   ", gameId=" + gameId +
+			   ", name='" + name + '\'' +
+			   ", slug='" + slug + '\'' +
+			   ", url='" + url + '\'' +
+			   ", iconUrl='" + iconUrl + '\'' +
+			   ", dateModified=" + dateModified +
+			   ", isClass=" + isClass +
+			   ", classId=" + classId +
+			   ", parentCategoryId=" + parentCategoryId +
+			   ", displayIndex=" + displayIndex +
+			   '}';
 	}
 }

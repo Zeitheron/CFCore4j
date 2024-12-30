@@ -5,16 +5,16 @@ import org.json.JSONObject;
 public class Pagination
 {
 	public final int resultCount;
-	public final int index;
+	public final long index;
 	public final int pageSize;
-	public final int totalCount;
+	public final long totalCount;
 
 	public Pagination(JSONObject $)
 	{
 		this.resultCount = $.getInt("resultCount");
-		this.index = $.getInt("index");
+		this.index = $.getLong("index");
 		this.pageSize = $.getInt("pageSize");
-		this.totalCount = $.getInt("totalCount");
+		this.totalCount = $.getLong("totalCount");
 	}
 
 	@Override

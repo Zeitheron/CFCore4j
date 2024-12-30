@@ -17,6 +17,10 @@ public enum FileStatus
 	BAKING, // 13
 	AWAITING_PUBLISHING, // 14
 	FAILED_PUBLISHING, // 15
+	UNDOCUMENTED_16, // 16
+	UNDOCUMENTED_17, // 17
+	UNDOCUMENTED_18, // 18
+	UNDOCUMENTED_19, // 19
 	UNKNOWN;
 
 	private static final FileStatus[] VALUES = values();

@@ -12,13 +12,20 @@ public class SearchModsRequest
 	private Long gameId;
 	private Long classId;
 	private Long categoryId;
+	private String categoryIds;
 	private String gameVersion;
+	private String gameVersions;
 	private String searchFilter;
 	private ModsSearchSortField sortField;
 	private SortOrder sortOrder;
 	private ModLoaderType modLoaderType;
+	private String modLoaderTypes;
 	private Long gameVersionTypeId;
-	private Integer index;
+	private Long authorId;
+	private Long primaryAuthorId;
+	private String slug;
+	
+	private Long index;
 	private Integer pageSize;
 
 	public static SearchModsRequest create()
@@ -44,9 +51,21 @@ public class SearchModsRequest
 		return this;
 	}
 
+	public SearchModsRequest categoryIds(String categoryIds)
+	{
+		this.categoryIds = categoryIds;
+		return this;
+	}
+
 	public SearchModsRequest gameVersion(String gameVersion)
 	{
 		this.gameVersion = gameVersion;
+		return this;
+	}
+
+	public SearchModsRequest gameVersions(String gameVersions)
+	{
+		this.gameVersions = gameVersions;
 		return this;
 	}
 
@@ -74,13 +93,37 @@ public class SearchModsRequest
 		return this;
 	}
 
+	public SearchModsRequest modLoaderTypes(String modLoaderTypes)
+	{
+		this.modLoaderTypes = modLoaderTypes;
+		return this;
+	}
+
 	public SearchModsRequest gameVersionTypeId(Long gameVersionTypeId)
 	{
 		this.gameVersionTypeId = gameVersionTypeId;
 		return this;
 	}
 
-	public SearchModsRequest index(Integer index)
+	public SearchModsRequest authorId(Long authorId)
+	{
+		this.authorId = authorId;
+		return this;
+	}
+
+	public SearchModsRequest primaryAuthorId(Long primaryAuthorId)
+	{
+		this.primaryAuthorId = primaryAuthorId;
+		return this;
+	}
+
+	public SearchModsRequest slug(String slug)
+	{
+		this.slug = slug;
+		return this;
+	}
+
+	public SearchModsRequest index(Long index)
 	{
 		this.index = index;
 		return this;
@@ -99,12 +142,18 @@ public class SearchModsRequest
 				.put("gameId", gameId)
 				.put("classId", classId)
 				.put("categoryId", categoryId)
+				.put("categoryIds", categoryIds)
 				.put("gameVersion", gameVersion)
+				.put("gameVersions", gameVersions)
 				.put("searchFilter", searchFilter)
 				.put("sortField", sortField)
 				.put("sortOrder", sortOrder)
 				.putOrdinal("modLoaderType", modLoaderType)
+				.put("modLoaderTypes", modLoaderTypes)
 				.put("gameVersionTypeId", gameVersionTypeId)
+				.put("authorId", authorId)
+				.put("primaryAuthorId", primaryAuthorId)
+				.put("slug", slug)
 				.put("index", index)
 				.put("pageSize", pageSize);
 	}
@@ -116,12 +165,17 @@ public class SearchModsRequest
 		r.gameId = gameId;
 		r.classId = classId;
 		r.categoryId = categoryId;
+		r.categoryIds = categoryIds;
 		r.gameVersion = gameVersion;
+		r.gameVersions = gameVersions;
 		r.searchFilter = searchFilter;
 		r.sortField = sortField;
 		r.sortOrder = sortOrder;
 		r.modLoaderType = modLoaderType;
 		r.gameVersionTypeId = gameVersionTypeId;
+		r.authorId = authorId;
+		r.primaryAuthorId = primaryAuthorId;
+		r.slug = slug;
 		r.index = index;
 		r.pageSize = pageSize;
 		return r;

@@ -14,4 +14,14 @@ public class ModAuthor
 		this.name = $.getString("name");
 		this.url = $.getString("url");
 	}
+	
+	@Override
+	public String toString()
+	{
+		return "ModAuthor{" +
+			   "id=" + id +
+			   ", name='" + name + '\'' +
+			   ", url='" + url + '\'' +
+			   '}';
+	}
 }

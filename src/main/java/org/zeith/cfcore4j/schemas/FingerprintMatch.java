@@ -15,7 +15,7 @@ public class FingerprintMatch
 	{
 		this.id = $.getLong("id");
 		this.file = new File($.getJSONObject("file"));
-		this.latestFiles = Util.parseList($.getJSONArray("latestFiles"), File::new);
+		this.latestFiles = Util.parseList($.optJSONArray("latestFiles"), File::new);
 	}
 
 	@Override

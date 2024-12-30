@@ -8,6 +8,7 @@ public class GetCategoriesRequest
 {
 	private Long gameId;
 	private Long classId;
+	private Boolean classesOnly;
 
 	public static GetCategoriesRequest create()
 	{
@@ -26,6 +27,12 @@ public class GetCategoriesRequest
 		return this;
 	}
 
+	public GetCategoriesRequest classesOnly(boolean classesOnly)
+	{
+		this.classesOnly = classesOnly;
+		return this;
+	}
+
 	public Long gameId()
 	{
 		return gameId;
@@ -41,6 +48,7 @@ public class GetCategoriesRequest
 	{
 		return QueryBuilder.start()
 				.put("gameId", gameId)
-				.put("classId", classId);
+				.put("classId", classId)
+				.put("classesOnly", classesOnly);
 	}
 }

@@ -5,7 +5,7 @@ import org.zeith.cfcore4j.Util;
 
 import java.time.Instant;
 
-public class SortableGameVersion
+public class SortableGameVersion implements Comparable<SortableGameVersion>
 {
 	public final String gameVersionName;
 	public final String gameVersionPadded;
@@ -32,5 +32,11 @@ public class SortableGameVersion
 				", gameVersionReleaseDate=" + gameVersionReleaseDate +
 				", gameVersionTypeId=" + gameVersionTypeId +
 				'}';
+	}
+	
+	@Override
+	public int compareTo(SortableGameVersion o)
+	{
+		return gameVersionPadded.compareTo(o.gameVersionPadded);
 	}
 }

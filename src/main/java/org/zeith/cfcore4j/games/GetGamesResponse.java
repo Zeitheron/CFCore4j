@@ -29,7 +29,7 @@ public class GetGamesResponse
 	}
 
 	@Override
-	public GetGamesResponse fromIndex(int index)
+	public GetGamesResponse fromIndex(long index)
 	{
 		return games.getGames(req.clone().index(index));
 	}

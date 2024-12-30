@@ -6,7 +6,7 @@ import org.zeith.cfcore4j.query.QueryBuilder;
 public class GetGamesRequest
 		implements IQueryContainer
 {
-	private Integer index;
+	private Long index;
 	private Integer pageSize;
 
 	public static GetGamesRequest create()
@@ -14,7 +14,7 @@ public class GetGamesRequest
 		return new GetGamesRequest();
 	}
 
-	public GetGamesRequest index(int index)
+	public GetGamesRequest index(long index)
 	{
 		this.index = index;
 		return this;

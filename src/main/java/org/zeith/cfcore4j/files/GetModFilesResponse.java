@@ -29,7 +29,7 @@ public class GetModFilesResponse
 	}
 
 	@Override
-	public GetModFilesResponse fromIndex(int index)
+	public GetModFilesResponse fromIndex(long index)
 	{
 		return files.getModFiles(req.clone().index(index));
 	}

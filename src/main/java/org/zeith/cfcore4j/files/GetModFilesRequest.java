@@ -2,13 +2,16 @@ package org.zeith.cfcore4j.files;
 
 import org.zeith.cfcore4j.query.IQueryContainer;
 import org.zeith.cfcore4j.query.QueryBuilder;
+import org.zeith.cfcore4j.schemas.ModLoaderType;
 
 public class GetModFilesRequest
 		implements IQueryContainer
 {
 	private long modId;
+	private String gameVersion;
+	private ModLoaderType modLoaderType;
 	private Long gameVersionTypeId;
-	private Integer index;
+	private Long index;
 	private Integer pageSize;
 
 	public GetModFilesRequest(long modId)
@@ -27,13 +30,25 @@ public class GetModFilesRequest
 		return this;
 	}
 
+	public GetModFilesRequest gameVersion(String gameVersion)
+	{
+		this.gameVersion = gameVersion;
+		return this;
+	}
+
+	public GetModFilesRequest modLoaderType(ModLoaderType modLoaderType)
+	{
+		this.modLoaderType = modLoaderType;
+		return this;
+	}
+
 	public GetModFilesRequest gameVersionTypeId(Long gameVersionTypeId)
 	{
 		this.gameVersionTypeId = gameVersionTypeId;
 		return this;
 	}
 
-	public GetModFilesRequest index(Integer index)
+	public GetModFilesRequest index(Long index)
 	{
 		this.index = index;
 		return this;
@@ -54,6 +69,8 @@ public class GetModFilesRequest
 	public QueryBuilder toBuilder()
 	{
 		return QueryBuilder.start()
+				.put("gameVersion", gameVersion)
+				.putOrdinal("modLoaderType", modLoaderType)
 				.put("gameVersionTypeId", gameVersionTypeId)
 				.put("index", index)
 				.put("pageSize", pageSize);
@@ -63,6 +80,8 @@ public class GetModFilesRequest
 	public GetModFilesRequest clone()
 	{
 		GetModFilesRequest r = new GetModFilesRequest(modId);
+		r.gameVersion = gameVersion;
+		r.modLoaderType = modLoaderType;
 		r.gameVersionTypeId = gameVersionTypeId;
 		r.index = index;
 		r.pageSize = pageSize;

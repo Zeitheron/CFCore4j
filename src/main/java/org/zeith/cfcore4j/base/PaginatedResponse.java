@@ -23,7 +23,7 @@ public abstract class PaginatedResponse<V, R extends PaginatedResponse<V, R>>
 
 	protected abstract List<V> decodeData(JSONArray data);
 
-	public abstract R fromIndex(int index);
+	public abstract R fromIndex(long index);
 
 	public R nextPage()
 	{
@@ -35,14 +35,14 @@ public abstract class PaginatedResponse<V, R extends PaginatedResponse<V, R>>
 		return pagination.index > 0 ? fromIndex(Math.max(0, pagination.index - pagination.resultCount)) : (R) this;
 	}
 
-	public boolean contains(int idx)
+	public boolean contains(long idx)
 	{
 		return idx >= pagination.index && idx < pagination.index + pagination.resultCount;
 	}
 
-	public V get(int idx)
+	public V get(long idx)
 	{
-		if(contains(idx)) return data.get(idx - pagination.index);
+		if(contains(idx)) return data.get((int) (idx - pagination.index));
 		return null;
 	}
 
@@ -53,11 +53,11 @@ public abstract class PaginatedResponse<V, R extends PaginatedResponse<V, R>>
 
 	public Iterator<V> iterateTillEnd()
 	{
-		int totalCount = pagination.totalCount;
+		long totalCount = pagination.totalCount;
 
 		return new Iterator<V>()
 		{
-			private int i = pagination.index;
+			private long i = pagination.index;
 			private PaginatedResponse<V, R> currentPage = PaginatedResponse.this;
 
 			@Override

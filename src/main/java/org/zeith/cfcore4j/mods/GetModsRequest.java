@@ -10,42 +10,50 @@ import java.util.List;
 public class GetModsRequest
 {
 	private final List<Long> modIds = new ArrayList<>();
-
+	private Boolean filterPcOnly;
+	
 	public static GetModsRequest create()
 	{
 		return new GetModsRequest();
 	}
-
+	
+	public GetModsRequest filterPcOnly(boolean filterPcOnly)
+	{
+		this.filterPcOnly = filterPcOnly;
+		return this;
+	}
+	
 	public GetModsRequest addMod(long... modId)
 	{
 		for(long i : modId)
 			modIds.add(i);
 		return this;
 	}
-
+	
 	public GetModsRequest addMod(Collection<Long> modId)
 	{
 		modIds.addAll(modId);
 		return this;
 	}
-
+	
 	public GetModsRequest addMod(Iterable<Long> modId)
 	{
 		for(long i : modId)
 			modIds.add(i);
 		return this;
 	}
-
+	
 	public List<Long> modIds()
 	{
 		return Collections.unmodifiableList(modIds);
 	}
-
+	
 	@Override
 	public String toString()
 	{
 		JSONObject $ = new JSONObject();
 		$.put("modIds", modIds);
+		if(filterPcOnly != null) $.put("filterPcOnly", filterPcOnly);
 		return $.toString();
 	}
 }

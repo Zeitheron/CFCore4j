@@ -2,6 +2,7 @@ package org.zeith.cfcore4j;
 
 import org.zeith.cfcore4j.mods.*;
 import org.zeith.cfcore4j.schemas.Mod;
+import org.zeith.cfcore4j.schemas.StringResponse;
 
 import java.util.Collection;
 import java.util.List;
@@ -160,11 +161,11 @@ public class Mods
 	 * @return GetModDescriptionResponse
 	 *
 	 * @see GetModDescriptionRequest
-	 * @see GetModDescriptionResponse
+	 * @see StringResponse
 	 */
-	public GetModDescriptionResponse getModDescription(GetModDescriptionRequest req)
+	public StringResponse getModDescription(GetModDescriptionRequest req)
 	{
-		return new GetModDescriptionResponse(
+		return new StringResponse(
 				core.request(1, "mods/" + req.modId() + "/description", null, "Mod " + req.modId() + " Description")
 						.get()
 		);
