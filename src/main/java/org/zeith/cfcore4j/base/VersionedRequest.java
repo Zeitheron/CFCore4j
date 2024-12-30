@@ -49,7 +49,8 @@ public class VersionedRequest
 	
 	public JSONHttpRequest request(String url, String method)
 	{
-		rateLimiter.acquire();
+		if(rateLimiter != null)
+			rateLimiter.acquire();
 		
 		JSONHttpRequest req = requestTransformator.apply(new JSONHttpRequest(url, method));
 		if(authorize)
