@@ -12,6 +12,10 @@ public enum ModsSearchSortField implements IStringable
 	TOTAL_DOWNLOADS, // 6
 	CATEGORY, // 7
 	GAME_VERSION, // 8
+	EARLY_ACCESS, // 9
+	FEATURED_RELEASED, // 10
+	RELEASED_DATE, // 11
+	RATING, // 12
 	UNKNOWN;
 
 	private static final ModsSearchSortField[] VALUES = values();
