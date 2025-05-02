@@ -12,7 +12,7 @@ public class GetModFilesRequest
 	private ModLoaderType modLoaderType;
 	private Long gameVersionTypeId;
 	private Long index;
-	private Integer pageSize;
+	private Integer pageSize = 50;
 
 	public GetModFilesRequest(long modId)
 	{

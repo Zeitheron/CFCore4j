@@ -1,14 +1,11 @@
-import org.zeith.cfcore4j.CFCore4j;
-import org.zeith.cfcore4j.CFCoreBuilder;
+import org.zeith.cfcore4j.*;
 import org.zeith.cfcore4j.base.HTTPCache;
 import org.zeith.cfcore4j.guava.RateLimiter;
 import org.zeith.cfcore4j.mods.SearchModsRequest;
 import org.zeith.cfcore4j.schemas.*;
 
-import java.util.Iterator;
 import java.util.concurrent.TimeUnit;
-import java.util.concurrent.atomic.AtomicInteger;
-import java.util.concurrent.atomic.AtomicLong;
+import java.util.concurrent.atomic.*;
 import java.util.stream.Collectors;
 
 public class TestCFCore4j
@@ -22,11 +19,6 @@ public class TestCFCore4j
 				.cache(HTTPCache.cacheInRAMFor(TimeUnit.HOURS, 2L).cacheSizeLimit(4)) // Set cache lifetime to 2 hours in RAM
 				.rateLimit(RateLimiter.create(5)) // Create force a ratelimit to CF API servers to be 5 calls per second
 				.build(); // Create our API
-		
-		Iterator<?> itr = api.files().getModFiles(261348L).iterateTillEnd();
-		while(itr.hasNext()){
-			System.out.println(itr.next());
-		}
 		
 		System.out.println(api.mods().getMods(310637L));
 		
